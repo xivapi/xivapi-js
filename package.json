@@ -1,0 +1,23 @@
+{
+  "name": "xivapi-js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "Client.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "request-promise-native": "^1.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://SacredPixel@bitbucket.org/SacredPixel/xivapi-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/SacredPixel/xivapi-js#readme"
+}
