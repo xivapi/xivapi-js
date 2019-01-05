@@ -3,7 +3,7 @@ const req = require('request-promise-native')
 
 /*TODO: columns, tags,
 */
-module.export = function(string, params) {
+module.export = function() {
 	req({
 		uri: this.endpoint + '',
 		qs: {
@@ -11,7 +11,7 @@ module.export = function(string, params) {
 			language: 	this.options.lang,
 			snake_case: this.options.snakecase ? 1 : 0,
 
-			
+
 		},
 		json: true
 	})
