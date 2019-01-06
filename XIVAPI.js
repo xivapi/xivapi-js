@@ -1,12 +1,14 @@
-const
+const utils = require('./utils'),
+	resources = require('./resources/'),
+
 	Search = require('./lib/search'),
-	Character = require('./lib/character')
+	Character = require('./lib/character'),
+	FreeCompany = require('./lib/freecompany')
 
 class XIVAPI {
 	/*{
-		lang			string		'en'		optional
+		language			string		'en'		optional
 		staging		bool			false		optional
-		testing		bool			false		optional
 		snakecase	bool			false		optional
 	}
 	*/
@@ -17,15 +19,18 @@ class XIVAPI {
 		this.endpoint = `https://${options.staging ? 'staging.' : ''}xivapi.com/`
 		this.globalQueries = {
 			key: 				apikey,
-			language: 	options.lang || 'en',
-			pretty:			options.testing ? 1 : 0,
+			language: 	options.language || 'en',
 			snake_case: options.snakecase ? 1 : 0,
 		}
+		if(!resources.languages.includes(this.globalQueries.language))
+			Error('invalid language given')
 
-		this.search 		= Search
+		this.resources = resources
+		this.utils = utils
+
+		this.search 		= Search.bind(this)
 		this.character 	= new Character(this)
-
-		console.log(this)
+		this.freecompany 	= new FreeCompany(this)
 	}
 }
 

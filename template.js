@@ -1,24 +1,18 @@
 // https://xivapi.com/docs/Welcome#section-4
-const req = require('request-promise-native')
+const Lib = require('./Lib')
 
-/*TODO: columns, tags,
+/*TODO: columns,
 */
-module.export = function() {
-	req({
-		uri: this.endpoint + '',
-		qs: {
-			key: 				this.apikey,
-			language: 	this.options.lang,
-			snake_case: this.options.snakecase ? 1 : 0,
+class  extends Lib {
+	constructor(parent) {
+		super(parent)
+	}
 
+	/*
+	{
 
-		},
-		json: true
-	})
-		.then((res) => {
-
-		})
-		.catch((err) => {
-
-		})
+	}
+	*/
 }
+
+module.exports =
