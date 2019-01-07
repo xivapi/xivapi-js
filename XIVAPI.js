@@ -7,7 +7,7 @@ const utils = require('./utils'),
 
 class XIVAPI {
 	/*{
-		language			string		'en'		optional
+		language	string		'en'		optional
 		staging		bool			false		optional
 		snakecase	bool			false		optional
 	}
@@ -17,13 +17,13 @@ class XIVAPI {
 			Error('apikey must be defined')
 
 		this.endpoint = `https://${options.staging ? 'staging.' : ''}xivapi.com/`
-		this.globalQueries = {
+		this.globalParams = {
 			key: 				apikey,
 			language: 	options.language || 'en',
 			snake_case: options.snakecase ? 1 : 0,
 		}
-		if(!resources.languages.includes(this.globalQueries.language))
-			Error('invalid language given')
+		if(!resources.languages.includes(this.globalParams.language))
+			Error(`invalid language given, must be: ${this.resources.languages}`)
 
 		this.resources = resources
 		this.utils = utils
