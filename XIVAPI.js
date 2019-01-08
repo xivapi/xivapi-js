@@ -9,7 +9,7 @@ class XIVAPI {
 	/*{
 		language	string		'en'		optional
 		staging		bool			false		optional
-		snakecase	bool			false		optional
+		snakecase	bool			false		optional ???
 	}
 	*/
 	constructor(apikey, options = {}) {
