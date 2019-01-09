@@ -15,14 +15,23 @@ module.exports = {
 		return words.join(' ')
 	},
 
+	//produce the status element for get() methods
 	cleanInfo(obj, category) {
 		let { State, Updated } = obj.Info[category]
 		obj.status = {
 			ok: State === 2 ? true : false,
 			id: State,
 			state: states.get(State),
-			updated: new Date(Updated * 1000)
+			updated: new Date(parseInt(`${Updated}000`)) //this is actually more efficient than doing `Updated * 1000`. yes, really
 		}
 		return obj
+	},
+
+	//XIVAPI returns/expects numbers more than 10 digits long to be strings. we account for that here
+	sanitizeInt(i) {
+		if(i < 10000000000)
+			return i
+		else
+			return i.toString()
 	}
 }
