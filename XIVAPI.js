@@ -1,15 +1,15 @@
 const utils = require('./utils'),
 	resources = require('./resources/'),
 
-	Search = require('./lib/search'),
-	Character = require('./lib/character'),
-	FreeCompany = require('./lib/freecompany')
+	Search 			= require('./lib/search'),
+	Character 	= require('./lib/character'),
+	FreeCompany	= require('./lib/freecompany'),
+	Linkshell		= require('./lib/linkshell')
 
 class XIVAPI {
 	/*{
 		language	string		'en'		optional
 		staging		bool			false		optional
-		snakecase	bool			false		optional ???
 	}
 	*/
 	constructor(apikey, options = {}) {
@@ -19,8 +19,7 @@ class XIVAPI {
 		this.endpoint = `https://${options.staging ? 'staging.' : ''}xivapi.com/`
 		this.globalParams = {
 			key: 				apikey,
-			language: 	options.language || 'en',
-			snake_case: options.snakecase ? 1 : 0,
+			language: 	options.language || 'en'
 		}
 		if(!resources.languages.includes(this.globalParams.language))
 			Error(`invalid language given, must be: ${this.resources.languages}`)
@@ -28,9 +27,10 @@ class XIVAPI {
 		this.resources = resources
 		this.utils = utils
 
-		this.search 		= Search.bind(this)
-		this.character 	= new Character(this)
-		this.freecompany 	= new FreeCompany(this)
+		this.search 			= Search.bind(this)
+		this.character 		= new Character(this)
+		this.freecompany	= new FreeCompany(this)
+		this.linkshell 		= new Linkshell(this)
 	}
 }
 

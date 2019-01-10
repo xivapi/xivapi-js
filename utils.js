@@ -16,7 +16,7 @@ module.exports = {
 	},
 
 	//produce the status element for get() methods
-	cleanInfo(obj, category) {
+	makeStatus(obj, category) {
 		let { State, Updated } = obj.Info[category]
 		obj.status = {
 			ok: State === 2 ? true : false,
