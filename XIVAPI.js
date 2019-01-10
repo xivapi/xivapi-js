@@ -4,7 +4,8 @@ const utils = require('./utils'),
 	Search 			= require('./lib/search'),
 	Character 	= require('./lib/character'),
 	FreeCompany	= require('./lib/freecompany'),
-	Linkshell		= require('./lib/linkshell')
+	Linkshell		= require('./lib/linkshell'),
+	Content			= require('./lib/content')
 
 class XIVAPI {
 	/*{
@@ -14,15 +15,15 @@ class XIVAPI {
 	*/
 	constructor(apikey, options = {}) {
 		if(typeof(apikey) === 'undefined')
-			Error('apikey must be defined')
+			throw Error('apikey must be defined')
 
-		this.endpoint = `https://${options.staging ? 'staging.' : ''}xivapi.com/`
+		this.endpoint = `https://${options.staging ? 'staging.' : ''}xivapi.com`
 		this.globalParams = {
 			key: 				apikey,
 			language: 	options.language || 'en'
 		}
 		if(!resources.languages.includes(this.globalParams.language))
-			Error(`invalid language given, must be: ${this.resources.languages}`)
+			throw Error(`invalid language given, must be: ${this.resources.languages}`)
 
 		this.resources = resources
 		this.utils = utils
@@ -31,6 +32,7 @@ class XIVAPI {
 		this.character 		= new Character(this)
 		this.freecompany	= new FreeCompany(this)
 		this.linkshell 		= new Linkshell(this)
+		this.content			= new Content(this)
 	}
 }
 

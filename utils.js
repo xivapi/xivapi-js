@@ -1,13 +1,21 @@
-//const request = require('request-promise-native')
-let states = new Map()
-states.set(0, 'STATE_NONE')
-states.set(1, 'STATE_ADDING')
-states.set(2, 'STATE_CACHED')
-states.set(3, 'STATE_NOT_FOUND')
-states.set(4, 'STATE_BLACKLIST')
-states.set(5, 'STATE_PRIVATE')
+const request = require('request-promise-native'),
+	states = new Map()
+		.set(0, 'STATE_NONE')
+		.set(1, 'STATE_ADDING')
+		.set(2, 'STATE_CACHED')
+		.set(3, 'STATE_NOT_FOUND')
+		.set(4, 'STATE_BLACKLIST')
+		.set(5, 'STATE_PRIVATE')
 
 module.exports = {
+	req(path, params) {
+		return request({
+			uri: this.endpoint + path,
+			qs: Object.assign(this.globalParams, params),
+			json: true
+		})
+	},
+
 	firstCapital(string) {
 		let split = string.split(' '), words = []
 		for(const item of split)
@@ -22,7 +30,7 @@ module.exports = {
 			ok: State === 2 ? true : false,
 			id: State,
 			state: states.get(State),
-			updated: new Date(parseInt(`${Updated}000`)) //this is actually more efficient than doing `Updated * 1000`. yes, really
+			updated: new Date(Updated * 1000)
 		}
 		return obj
 	},
@@ -33,5 +41,11 @@ module.exports = {
 			return i
 		else
 			return i.toString()
+	},
+
+	cleanContent(entry) {
+		entry.Icon = this.endpoint + entry.Icon
+		entry.Url = this.endpoint + entry.Url
+		return entry
 	}
 }
