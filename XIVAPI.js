@@ -9,8 +9,9 @@ const utils = require('./utils'),
 
 class XIVAPI {
 	/*{
-		language	string		'en'		optional
-		staging		bool			false		optional
+		language		string	'en'		optional
+		staging			bool		false		optional
+		snake_case	bool		false		optional
 	}
 	*/
 	constructor(apikey, options = {}) {
@@ -20,7 +21,8 @@ class XIVAPI {
 		this.endpoint = `https://${options.staging ? 'staging.' : ''}xivapi.com`
 		this.globalParams = {
 			key: 				apikey,
-			language: 	options.language || 'en'
+			language: 	options.language || 'en',
+			snake_case:	options.snake_case
 		}
 		if(!resources.languages.includes(this.globalParams.language))
 			throw Error(`invalid language given, must be: ${this.resources.languages}`)

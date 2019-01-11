@@ -1,5 +1,5 @@
 const request = require('request-promise-native'),
-	states = new Map()
+	stateNames = new Map()
 		.set(0, 'STATE_NONE')
 		.set(1, 'STATE_ADDING')
 		.set(2, 'STATE_CACHED')
@@ -25,12 +25,17 @@ module.exports = {
 
 	//produce the status element for get() methods
 	makeStatus(obj, category) {
-		let { State, Updated } = obj.Info[category]
+		let snake_case = this.globalParams.snake_case
+		let info = obj[module.exports.correctCase('info', snake_case)][module.exports.correctCase(category, snake_case)]
+
+		let state = info[module.exports.correctCase('state', snake_case)],
+			updated = info[module.exports.correctCase('updated', snake_case)]
+
 		obj.status = {
-			ok: State === 2 ? true : false,
-			id: State,
-			state: states.get(State),
-			updated: new Date(Updated * 1000)
+			ok: state === 2 ? true : false,
+			id: state,
+			state: stateNames.get(state),
+			updated: new Date(updated * 1000)
 		}
 		return obj
 	},
@@ -44,8 +49,19 @@ module.exports = {
 	},
 
 	cleanContent(entry) {
-		entry.Icon = this.endpoint + entry.Icon
-		entry.Url = this.endpoint + entry.Url
+		let icon = module.exports.correctCase('icon', this.globalParams.snake_case),
+			url = module.exports.correctCase('url', this.globalParams.snake_case)
+		entry[icon] = this.endpoint + entry[icon]
+		entry[url] = this.endpoint + entry[url]
 		return entry
+	},
+
+	//get right name based on snake_case
+	correctCase(string, snake_case) {
+		if(snake_case)//snake case
+			return string
+
+		string = string.replace('_', ' ')
+		return module.exports.firstCapital(string).replace(' ', '')//capital case
 	}
 }
