@@ -1,12 +1,14 @@
 const Benchmark = require('benchmark')
 let suite = new Benchmark.Suite
 
-suite.add('multiply int', () => {
-	let time = new Date(1547054962 * 1000)
+suite.add('concat', () => {
+	let x = 'content'
+	let y = '/' + x
 })
 
-suite.add('add to string', () => {
-	let time = new Date(parseInt(`${1547054962}000`))
+suite.add('jquery', () => {
+	let x = 'content'
+	let y = `/${x}`
 })
 
 suite.on('cycle', function(event) {console.log(String(event.target)) })
