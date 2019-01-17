@@ -30,7 +30,7 @@ class XIVAPI {
 		this.resources = resources
 		this.utils = utils
 
-		this.search 			= Search.bind(this)
+		this.search				= Search.bind(this)
 		this.character 		= new Character(this)
 		this.freecompany	= new FreeCompany(this)
 		this.linkshell 		= new Linkshell(this)
