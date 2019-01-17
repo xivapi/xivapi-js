@@ -8,6 +8,7 @@ const request = require('request-promise-native'),
 		.set(5, 'STATE_PRIVATE')
 
 module.exports = {
+	//standard request function
 	req(path, params) {
 		return request({
 			uri: this.endpoint + path,
@@ -16,6 +17,16 @@ module.exports = {
 		})
 	},
 
+	//JSON request function
+	reqJSON(path, body) {
+		return request({
+			uri: this.endpoint + path,
+			body: body,
+			json: true
+		})
+	},
+
+	//proper Upper Case for strings
 	firstCapital(string) {
 		let split = string.split(' '), words = []
 		for(const item of split)
@@ -23,7 +34,7 @@ module.exports = {
 		return words.join(' ')
 	},
 
-	//produce the status element for get() methods
+	//produce the status field for get() methods
 	makeStatus(obj, category) {
 		let snake_case = this.globalParams.snake_case
 		let info = obj[module.exports.correctCase('info', snake_case)][module.exports.correctCase(category, snake_case)]
@@ -40,7 +51,7 @@ module.exports = {
 		return obj
 	},
 
-	//XIVAPI returns/expects numbers more than 10 digits long to be strings. we account for that here
+	//XIVAPI expects numbers more than 10 digits long as strings. we account for that here
 	sanitizeInt(i) {
 		if(i < 10000000000)
 			return i
@@ -48,6 +59,7 @@ module.exports = {
 			return i.toString()
 	},
 
+	//resolve URLs
 	cleanContent(entry) {
 		let icon = module.exports.correctCase('icon', this.globalParams.snake_case),
 			url = module.exports.correctCase('url', this.globalParams.snake_case)
@@ -63,5 +75,12 @@ module.exports = {
 
 		string = string.replace('_', ' ')
 		return module.exports.firstCapital(string).replace(' ', '')//capital case
+	},
+
+	cleanColumns(x) {
+		if(Array.isArray(x))
+			return x.join(',')
+		else if(typeof(x) === 'string')
+			return x
 	}
 }
