@@ -5,7 +5,7 @@ const utils = require('./utils'),
 	Character 	= require('./lib/character'),
 	FreeCompany	= require('./lib/freecompany'),
 	Linkshell		= require('./lib/linkshell'),
-	Data			= require('./lib/data')
+	Data 				= require('./lib/data')
 
 class XIVAPI {
 	/*{

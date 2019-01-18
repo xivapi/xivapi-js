@@ -77,6 +77,7 @@ module.exports = {
 		return module.exports.firstCapital(string).replace(' ', '')//capital case
 	},
 
+	//
 	cleanColumns(x) {
 		if(Array.isArray(x))
 			return x.join(',')
