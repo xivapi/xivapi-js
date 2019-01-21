@@ -20,6 +20,7 @@ module.exports = {
 	//JSON request function
 	reqJSON(path, body) {
 		return request({
+			method: 'POST',
 			uri: this.endpoint + path,
 			body: body,
 			json: true
@@ -73,15 +74,21 @@ module.exports = {
 		if(snake_case)//snake case
 			return string
 
+		if(string === 'pvp_team')
+			return 'PvPTeam'
+
 		string = string.replace('_', ' ')
 		return module.exports.firstCapital(string).replace(' ', '')//capital case
 	},
 
 	//
-	cleanColumns(x) {
+	makeCSV(x) {
+		if(typeof(x) === 'undefined')
+			return
+
 		if(Array.isArray(x))
 			return x.join(',')
-		else if(typeof(x) === 'string')
+		if(typeof(x) === 'string')
 			return x
 	}
 }

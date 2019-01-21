@@ -1,11 +1,13 @@
 const utils = require('./utils'),
 	resources = require('./resources/'),
 
-	Search 			= require('./lib/search'),
-	Character 	= require('./lib/character'),
-	FreeCompany	= require('./lib/freecompany'),
-	Linkshell		= require('./lib/linkshell'),
-	Data 				= require('./lib/data')
+	Search = require('./lib/search'),
+	Data = require('./lib/data'),
+	Character = require('./lib/character'),
+	FreeCompany = require('./lib/freecompany'),
+	Linkshell = require('./lib/linkshell'),
+	PvPTeam = require('./lib/pvpteam'),
+	Lodestone = require('./lib/lodestone')
 
 class XIVAPI {
 	/*{
@@ -20,8 +22,8 @@ class XIVAPI {
 
 		this.endpoint = `https://${options.staging ? 'staging.' : ''}xivapi.com`
 		this.globalParams = {
-			key: 				apikey,
-			language: 	options.language || 'en',
+			key: apikey,
+			language: options.language || 'en',
 			snake_case:	options.snake_case
 		}
 		if(!resources.languages.includes(this.globalParams.language))
@@ -30,11 +32,13 @@ class XIVAPI {
 		this.resources = resources
 		this.utils = utils
 
-		this.search				= Search.bind(this)
-		this.character 		= new Character(this)
-		this.freecompany	= new FreeCompany(this)
-		this.linkshell 		= new Linkshell(this)
-		this.data					= new Data(this)
+		this.search = Search.bind(this)
+		this.data = new Data(this)
+		this.character = new Character(this)
+		this.freecompany = new FreeCompany(this)
+		this.linkshell = new Linkshell(this)
+		this.pvpteam = new PvPTeam(this)
+		this.lodestone = Lodestone.bind(this)
 	}
 }
 
