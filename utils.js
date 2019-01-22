@@ -60,13 +60,24 @@ module.exports = {
 			return i.toString()
 	},
 
-	//resolve URLs
-	cleanContent(entry) {
+	//transform URLs properly
+	cleanContent(input) {
 		let icon = module.exports.correctCase('icon', this.globalParams.snake_case),
 			url = module.exports.correctCase('url', this.globalParams.snake_case)
-		entry[icon] = this.endpoint + entry[icon]
-		entry[url] = this.endpoint + entry[url]
-		return entry
+
+		const run = (entry) => {
+			entry[icon] = this.endpoint + entry[icon]
+			entry[url] = this.endpoint + entry[url]
+			return entry
+		}
+
+		if(Array.isArray(input))
+			for (let i = 0; i < input.length; i++)
+				input[i] = run(input[i])
+		else
+			input = run(input)
+
+		return input
 	},
 
 	//get right name based on snake_case
