@@ -1,5 +1,8 @@
 # xivapi-js
 
+[![npm version](https://badge.fury.io/js/xivapi-js.svg)](https://www.npmjs.com/package/xivapi-js)
+[![license](https://img.shields.io/github/license/xivapi/xivapi-js.svg)](LICENSE)
+
 This is a pure JS wrapper for interacting with [XIVAPI](https://xivapi.com/) and handling all requests in a simple, promise-driven manner.
 
 ## Installation
