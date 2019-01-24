@@ -7,7 +7,8 @@ const utils = require('./utils'),
 	FreeCompany = require('./lib/freecompany'),
 	Linkshell = require('./lib/linkshell'),
 	PvPTeam = require('./lib/pvpteam'),
-	Lodestone = require('./lib/lodestone')
+	Lodestone = require('./lib/lodestone'),
+	Market = require('./lib/market')
 
 class XIVAPI {
 	/*{
@@ -39,6 +40,7 @@ class XIVAPI {
 		this.linkshell = new Linkshell(this)
 		this.pvpteam = new PvPTeam(this)
 		this.lodestone = Lodestone.bind(this)
+		this.market = new Market(this)
 	}
 }
 
