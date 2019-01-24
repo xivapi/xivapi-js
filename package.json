@@ -1,8 +1,8 @@
 {
   "name": "xivapi-js",
-  "version": "1.0.0",
-  "description": "",
-  "main": "Client.js",
+  "version": "0.1.0",
+  "description": "A pure JS wrapper for xivapi.com",
+  "main": "XIVAPI.js",
   "directories": {
     "lib": "lib"
   },
@@ -16,9 +16,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://SacredPixel@bitbucket.org/SacredPixel/xivapi-js.git"
+    "url": "git+https://github.com/xivapi/xivapi-js.git"
   },
-  "author": "",
-  "license": "ISC",
-  "homepage": "https://bitbucket.org/SacredPixel/xivapi-js#readme"
+	"keywords": [
+		"xivapi"
+	],
+  "author": "TheSacredPixel",
+  "license": "MIT",
+	"bugs": {
+    "url": "https://github.com/xivapi/xivapi-js/issues"
+	},
+  "homepage": "https://github.com/xivapi/xivapi-js#readme"
 }
