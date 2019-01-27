@@ -61,21 +61,38 @@ module.exports = {
 	},
 
 	//transform URLs properly
-	cleanContent(input) {
+	cleanContent(input, deep) {
 		let icon = module.exports.correctCase('icon', this.globalParams.snake_case),
 			url = module.exports.correctCase('url', this.globalParams.snake_case)
 
-		const run = (entry) => {
+		const properties = [icon, url]
+
+		const clean = (entry) => {
 			entry[icon] = this.endpoint + entry[icon]
 			entry[url] = this.endpoint + entry[url]
 			return entry
 		}
 
-		if(Array.isArray(input))
-			for (let i = 0; i < input.length; i++)
-				input[i] = run(input[i])
-		else
-			input = run(input)
+		const deepClean = (obj) => {
+			Object.keys(obj).some((k) => {
+				if (properties.includes(k)) {
+					obj[k] = this.endpoint + obj[k]
+				}
+				if (obj[k] && typeof(obj[k]) === 'object') {
+					deepClean(obj[k])
+				}
+			})
+		}
+
+		if(!deep) {
+			if(Array.isArray(input))
+				for (let i = 0; i < input.length; i++)
+					input[i] = clean(input[i])
+			else
+				input = clean(input)
+		} else {
+			input = deepClean(input)
+		}
 
 		return input
 	},

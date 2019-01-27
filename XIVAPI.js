@@ -1,5 +1,4 @@
-const utils = require('./utils'),
-	resources = require('./resources/'),
+const resources = require('./resources/'),
 
 	Search = require('./lib/search'),
 	Data = require('./lib/data'),
@@ -31,7 +30,6 @@ class XIVAPI {
 			throw Error(`invalid language given, must be: ${this.resources.languages}`)
 
 		this.resources = resources
-		this.utils = utils
 
 		this.search = Search.bind(this)
 		this.data = new Data(this)
