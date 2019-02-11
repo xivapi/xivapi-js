@@ -10,9 +10,12 @@ const request = require('request-promise-native'),
 module.exports = {
 	//standard request function
 	req(path, params) {
+		let snake_case = typeof params.snake_case !== 'undefined' ? params.snake_case : this.globalParams.snake_case
+		snake_case = snake_case ? 1 : 0
+
 		return request({
 			uri: this.endpoint + path,
-			qs: Object.assign(this.globalParams, params),
+			qs: Object.assign(this.globalParams, params, {snake_case}),
 			json: true
 		})
 	},
