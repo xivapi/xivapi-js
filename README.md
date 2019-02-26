@@ -22,7 +22,7 @@ const xiv = new XIVAPI('yourAPIkey')
 
 ...and then check out the [wiki](https://github.com/xivapi/xivapi-js/wiki) for usage help!
 
-If you get really stuck and need some help, or run into any problems/concerns, either open up an issue on github or join the [XIVAPI discord server](https://discord.gg/MFFVHWC) and ping @SacredPixel#0039.
+If you get really stuck and need some help, or run into any problems/concerns, either open up an issue on github or join the [XIVAPI discord server](https://discord.gg/MFFVHWC) and ping/DM @SacredPixel.
 
 ### Examples:
 
