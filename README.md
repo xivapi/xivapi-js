@@ -17,7 +17,7 @@ npm i xivapi-js
 Require and initialize the module in your code:
 ```js
 const XIVAPI = require('xivapi-js')
-const xiv = new XIVAPI('yourAPIkey')
+const xiv = new XIVAPI()
 ```
 
 ...and then check out the [wiki](https://github.com/xivapi/xivapi-js/wiki) for usage help!
