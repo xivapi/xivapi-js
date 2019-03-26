@@ -18,7 +18,7 @@ class XIVAPI {
 	*/
 	constructor(apikey, options = {}) {
 		if(typeof(apikey) === 'undefined')
-			throw Error('The API key must be defined.')
+			throw Error('The apikey must be defined.')
 
 		this.endpoint = `https://${options.staging ? 'staging.' : ''}xivapi.com`
 		this.globalParams = {
