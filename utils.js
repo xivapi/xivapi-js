@@ -10,6 +10,9 @@ const request = require('request-promise-native'),
 module.exports = {
 	//standard request function
 	req(path, params) {
+		if(typeof params.snake_case !== 'undefined')
+			params.snake_case = params.snake_case ? 1 : 0
+
 		return request({
 			uri: this.endpoint + path,
 			qs: Object.assign(this.globalParams, params),
@@ -102,14 +105,20 @@ module.exports = {
 		if(snake_case)//snake case
 			return string
 
-		if(string === 'pvp_team')
-			return 'PvPTeam'
+		//special exceptions
+		switch (string) {
+			case 'pvp_team':
+				return 'PvPTeam'
+			case 'id':
+				return 'ID'
+		}
 
+		//make capital case
 		string = string.replace('_', ' ')
 		return module.exports.firstCapital(string).replace(' ', '')//capital case
 	},
 
-	//
+	//handle both comma-separated strings, and string arrays, for CSV params
 	makeCSV(x) {
 		if(typeof(x) === 'undefined')
 			return
@@ -118,5 +127,10 @@ module.exports = {
 			return x.join(',')
 		if(typeof(x) === 'string')
 			return x
+	},
+
+	//get snake_case for method based on params and globalParams
+	getCurrCase(globalParams, params) {
+		return (typeof params.snake_case !== 'undefined') ? params.snake_case : globalParams.snake_case
 	}
 }
