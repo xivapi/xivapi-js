@@ -1,7 +1,7 @@
 const XIVAPI = require('./XIVAPI'),
 	readline = require('readline')
 
-const xiv = new XIVAPI('yourAPIkey', {snake_case: true})
+const xiv = new XIVAPI({snake_case: true})
 
 let rl = readline.createInterface({
 	input: process.stdin,
