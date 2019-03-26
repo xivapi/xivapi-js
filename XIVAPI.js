@@ -18,7 +18,7 @@ class XIVAPI {
 	*/
 	constructor(apikey, options = {}) {
 		if(typeof(apikey) === 'undefined')
-			throw Error('apikey must be defined')
+			throw Error('The API key must be defined.')
 
 		this.endpoint = `https://${options.staging ? 'staging.' : ''}xivapi.com`
 		this.globalParams = {
@@ -27,7 +27,7 @@ class XIVAPI {
 			snake_case:	options.snake_case
 		}
 		if(!resources.languages.includes(this.globalParams.language))
-			throw Error(`invalid language given, must be: ${this.resources.languages}`)
+			throw Error(`Invalid language given, must be: ${this.resources.languages}`)
 
 		this.resources = resources
 
