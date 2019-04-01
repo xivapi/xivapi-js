@@ -13,8 +13,9 @@ class XIVAPI {
 	/*{
 		private_key	string	undefined	optional
 		language		string	'en'			optional
-		staging			bool		false			optional
 		snake_case	bool		false			optional
+		staging			bool		false			optional
+		verbose			bool		false			optional
 	}
 	*/
 	constructor(options = {}, legacyOptions = {}) {
@@ -30,9 +31,18 @@ See how in https://github.com/xivapi/xivapi-js/releases/tag/v0.1.3.\n\
 
 		this.endpoint = `https://${options.staging ? 'staging.' : ''}xivapi.com`
 		if(options.language && !resources.languages.includes(options.language))
-			throw Error(`Invalid language given, must be: ${this.resources.languages}`)
+			throw Error(`Invalid language given, must be one of: ${this.resources.languages}`)
 
-		this.globalParams = options
+		this.globalParams = {}
+
+		for (let x of ['private_key', 'language']) {
+			if(typeof options[x] !== 'undefined')
+				this.globalParams[x] = options[x]
+		}
+		if(options.snake_case)
+			this.globalParams.snake_case = 1
+
+		this.verbose = options.verbose
 
 		this.resources = resources
 

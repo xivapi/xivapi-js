@@ -10,18 +10,26 @@ const request = require('request-promise-native'),
 module.exports = {
 	//standard request function
 	req(path, params) {
-		if(typeof params.snake_case !== 'undefined')
+		if(params && typeof params.snake_case !== 'undefined')
 			params.snake_case = params.snake_case ? 1 : 0
+
+		params = Object.assign({}, this.globalParams, params)
+
+		if(this.verbose)
+			console.log(`Requesting ${path} with params: `, params)
 
 		return request({
 			uri: this.endpoint + path,
-			qs: Object.assign(this.globalParams, params),
+			qs: params,
 			json: true
 		})
 	},
 
 	//JSON request function
 	reqJSON(path, body) {
+		if(this.verbose)
+			console.log(`Requesting ${path} with body: `, body)
+
 		return request({
 			method: 'POST',
 			uri: this.endpoint + path,
@@ -64,9 +72,9 @@ module.exports = {
 	},
 
 	//transform URLs properly
-	cleanContent(input, deep) {
-		let icon = module.exports.correctCase('icon', this.globalParams.snake_case),
-			url = module.exports.correctCase('url', this.globalParams.snake_case)
+	cleanContent(input, snake_case, deep) {
+		let icon = module.exports.correctCase('icon', snake_case),
+			url = module.exports.correctCase('url', snake_case)
 
 		const properties = [icon, url]
 
