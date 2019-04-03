@@ -1,15 +1,8 @@
-const XIVAPI = require('./XIVAPI'),
-	readline = require('readline')
+const XIVAPI = require('./XIVAPI')
+const xiv = new XIVAPI()
 
-const xiv = new XIVAPI({
-	//snake_case: true,
-	verbose: true
-})
-
-let rl = readline.createInterface({
-	input: process.stdin,
-	output: process.stdout,
-	terminal: false
-}).on('line', function (cmd) {
-	console.log(eval(cmd))
+xiv.freeCompany.get(`9233364398528114605`).then(callback => {
+	console.log(callback)
+}).catch(callback => {
+	console.error(callback)
 })

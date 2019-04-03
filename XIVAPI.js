@@ -1,13 +1,13 @@
 const resources = require('./resources/'),
 
-	Search = require('./lib/search'),
-	Data = require('./lib/data'),
-	Character = require('./lib/character'),
-	FreeCompany = require('./lib/freecompany'),
-	Linkshell = require('./lib/linkshell'),
-	PvPTeam = require('./lib/pvpteam'),
-	Lodestone = require('./lib/lodestone'),
-	Market = require('./lib/market')
+	Search = require('./lib/Search'),
+	Data = require('./lib/Data'),
+	Character = require('./lib/Character'),
+	FreeCompany = require('./lib/FreeCompany'),
+	Linkshell = require('./lib/Linkshell'),
+	PvPTeam = require('./lib/PvPTeam'),
+	Lodestone = require('./lib/Lodestone'),
+	Market = require('./lib/Market')
 
 class XIVAPI {
 	/*{
@@ -49,7 +49,7 @@ See how in https://github.com/xivapi/xivapi-js/releases/tag/v0.1.3.\n\
 		this.search = Search.bind(this)
 		this.data = new Data(this)
 		this.character = new Character(this)
-		this.freecompany = new FreeCompany(this)
+		this.freeCompany = new FreeCompany(this)
 		this.linkshell = new Linkshell(this)
 		this.pvpteam = new PvPTeam(this)
 		this.lodestone = Lodestone.bind(this)
