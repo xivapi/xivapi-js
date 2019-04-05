@@ -1,6 +1,6 @@
 {
   "name": "xivapi-js",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "A Node.JS wrapper for xivapi.com",
   "main": "XIVAPI.js",
   "directories": {
@@ -19,7 +19,8 @@
     "url": "git+https://github.com/xivapi/xivapi-js.git"
   },
 	"keywords": [
-		"xivapi"
+		"xivapi",
+		"ffxiv"
 	],
   "author": "TheSacredPixel",
   "license": "MIT",
