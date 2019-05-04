@@ -33,7 +33,7 @@ const getItemPrice = async () => {
   let res = await xiv.search('Stuffed Khloe')
   
   //use item ID for market query
-  res = await xiv.market.prices(res.Results[0].ID, 'Excalibur')
+  res = await xiv.market.get(res.Results[0].ID, {server: 'Excalibur'})
   
   //return lowest price
   return res.Prices[0].PricePerUnit
