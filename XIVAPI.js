@@ -1,13 +1,10 @@
 const resources = require('./resources/'),
-
 	Search = require('./lib/search'),
 	Data = require('./lib/data'),
 	Character = require('./lib/character'),
 	FreeCompany = require('./lib/freecompany'),
 	Linkshell = require('./lib/linkshell'),
-	PvPTeam = require('./lib/pvpteam'),
-	Lodestone = require('./lib/lodestone'),
-	Market = require('./lib/market')
+	PvPTeam = require('./lib/pvpteam')
 
 class XIVAPI {
 	/*{
@@ -45,6 +42,7 @@ See how in https://github.com/xivapi/xivapi-js/releases/tag/v0.1.3.\n\
 		this.verbose = options.verbose
 
 		this.resources = resources
+		this.utils = require('./utils')
 
 		this.search = Search.bind(this)
 		this.data = new Data(this)
@@ -52,8 +50,6 @@ See how in https://github.com/xivapi/xivapi-js/releases/tag/v0.1.3.\n\
 		this.freecompany = new FreeCompany(this)
 		this.linkshell = new Linkshell(this)
 		this.pvpteam = new PvPTeam(this)
-		this.lodestone = Lodestone.bind(this)
-		this.market = new Market(this)
 	}
 }
 
