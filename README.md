@@ -26,36 +26,29 @@ If you get really stuck and need some help, or run into any problems/concerns, e
 
 ### Examples:
 
-Find an item ID, and then get the lowest market board price in a specific server:
+Find an item's ID:
 ```js
 const getItemPrice = async () => {
   //find item
   let res = await xiv.search('Stuffed Khloe')
 
-  //use item ID for market query
-  res = await xiv.market.get(res.Results[0].ID, {servers: 'Excalibur'})
-
-  //return lowest price
-  return res.Prices[0].PricePerUnit
+  //return item ID
+  return res.Results[0].ID
 }
 ```
 
-Get the most recent lodestone news post:
+Search for an FC and get an list of members:
 ```javascript
-const getLatestNews = async () => {
-  //get the lodestone state
-  let ls = await xiv.lodestone()
+const getMembers = async () => {
+  //find the FC with its name and server
+  let res = await xiv.freecompany.search('My Fun FC', {server: 'Excalibur'})
 
-  //get most recent entry
-  let entry = ls.News[0]
+  //get the FC ID
+  let id = res.Results[0].ID
 
-  //get the time since the entry's creation
-  let timeNow = new Date()
-  let diff = new Date(timeNow - entry.Time) //xivapi-js converts the timestamp into a Date object,
-                                            //so you can just do this!
-
-  //return your parsed entry
-  console.log(`${entry.Title} (published ${diff.getUTCMinutes()} minutes ago)`)
+  //get and return fc members
+  let fc = await xiv.freecompany.get('9231253336202687179', {data: FCM})
+  return fc.FreeCompanyMembers
 }
 ```
 
@@ -65,11 +58,11 @@ const verifyCharacter = async () => {
   //find the character with their name and server
   let res = await xiv.character.search('Kai Megumi', {server: 'excalibur'}) //case insensitive server names, btw ;)
 
-  //get the character's ID
-  let id = res.Results[0].ID
+  //get the character
+  let char = res.Results[0]
 
   //return whether or not the character's lodestone bio matches our token
-  return await xiv.character.verification(id, 'token string')
+  return char.Bio === 'example_token'
 }
 ```
 
