@@ -28,7 +28,7 @@ If you get really stuck and need some help, or run into any problems/concerns, e
 
 Find an item's ID:
 ```js
-const getItemPrice = async () => {
+const getID = async () => {
   //find item
   let res = await xiv.search('Stuffed Khloe')
 
