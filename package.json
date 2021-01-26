@@ -1,14 +1,14 @@
 {
-  "name": "xivapi-js",
-  "version": "0.3.0",
+  "name": "@xivapi/js",
+  "version": "0.3.2",
   "description": "A Node.JS wrapper for xivapi.com",
   "main": "XIVAPI.js",
   "directories": {
     "lib": "lib"
   },
   "dependencies": {
-    "request": "^2.88.0",
-    "request-promise-native": "^1.0.5"
+    "request": "^2.88.2",
+    "request-promise-native": "^1.0.9"
   },
   "devDependencies": {},
   "scripts": {
@@ -18,14 +18,14 @@
     "type": "git",
     "url": "git+https://github.com/xivapi/xivapi-js.git"
   },
-	"keywords": [
-		"xivapi",
-		"ffxiv"
-	],
-  "author": "TheSacredPixel",
+  "keywords": [
+    "xivapi",
+    "ffxiv"
+  ],
+  "author": "Kim Kar <mail@kai.moe> (https://kai.moe/)",
   "license": "MIT",
-	"bugs": {
+  "bugs": {
     "url": "https://github.com/xivapi/xivapi-js/issues"
-	},
+  },
   "homepage": "https://github.com/xivapi/xivapi-js#readme"
 }

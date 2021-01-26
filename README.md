@@ -1,6 +1,6 @@
 # xivapi-js
 
-[![npm version](https://badge.fury.io/js/xivapi-js.svg)](https://www.npmjs.com/package/xivapi-js)
+[![npm version](https://badge.fury.io/js/%40xivapi%2Fjs.svg)](https://badge.fury.io/js/%40xivapi%2Fjs)
 [![license](https://img.shields.io/github/license/xivapi/xivapi-js.svg)](LICENSE)
 
 This is a pure JS wrapper for interacting with [XIVAPI](https://xivapi.com/) and handling all requests in a simple, promise-driven manner.
@@ -9,14 +9,14 @@ This is a pure JS wrapper for interacting with [XIVAPI](https://xivapi.com/) and
 
 Simply add the module to your node project with `npm`:
 ```
-npm i xivapi-js
+npm i @xivapi/js
 ```
 
 ## Usage
 
 Require and initialize the module in your code:
 ```js
-const XIVAPI = require('xivapi-js')
+const XIVAPI = require('@xivapi/js')
 const xiv = new XIVAPI()
 ```
 
