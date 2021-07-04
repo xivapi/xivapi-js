@@ -2,9 +2,13 @@ const request = require('request-promise-native')
 
 module.exports = {
 	//standard request function
-	req(path, params) {
-		if(params && typeof params.snake_case !== 'undefined')
-			params.snake_case = params.snake_case ? 1 : 0
+	req(path, params={}) {
+		let convs = ['snake_case', 'extended']
+		for (const c of convs) {
+			if(typeof params[c] !== 'undefined')
+				params[c] = params[c] ? 1 : 0
+		}
+
 
 		params = Object.assign({}, this.globalParams, params)
 
