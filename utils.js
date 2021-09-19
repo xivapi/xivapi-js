@@ -1,8 +1,8 @@
-const request = require('request-promise-native')
+const request = require('@root/request')
 
 module.exports = {
 	//standard request function
-	req(path, params={}) {
+	async req(path, params={}) {
 		let convs = ['snake_case', 'extended']
 		for (const c of convs) {
 			if(typeof params[c] !== 'undefined')
@@ -15,24 +15,23 @@ module.exports = {
 		if(this.verbose)
 			console.log(`Requesting ${path} with params: `, params)
 
-		return request({
-			uri: this.endpoint + path,
-			qs: params,
+		return (await request({
+			uri: `${this.endpoint + path}${Object.keys(params).length > 0 ? `?${new URLSearchParams(params).toString()}` : ''}`,
 			json: true
-		})
+		})).body
 	},
 
 	//JSON request function
-	reqJSON(path, body) {
+	async reqJSON(path, body) {
 		if(this.verbose)
 			console.log(`Requesting ${path} with body: `, body)
 
-		return request({
+		return (await request({
 			method: 'POST',
 			uri: this.endpoint + path,
 			body: body,
 			json: true
-		})
+		})).body
 	},
 
 	//handle both comma-separated strings, and string arrays, for CSV params
