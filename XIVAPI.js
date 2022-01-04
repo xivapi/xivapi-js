@@ -28,7 +28,7 @@ See how in https://github.com/xivapi/xivapi-js/releases/tag/v0.1.3.\n\
 
 		this.endpoint = `https://${options.staging ? 'staging.' : ''}xivapi.com`
 		if(options.language && !resources.languages.includes(options.language))
-			throw Error(`Invalid language given, must be one of: ${this.resources.languages}`)
+			throw Error(`Invalid language given, must be one of: ${resources.languages}`)
 
 		this.globalParams = {}
 
