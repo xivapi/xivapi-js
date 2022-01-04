@@ -3,6 +3,7 @@
   "version": "0.3.3",
   "description": "A Node.JS wrapper for xivapi.com",
   "main": "XIVAPI.js",
+  "types": "types/XIVAPI.d.ts",
   "directories": {
     "lib": "lib"
   },
