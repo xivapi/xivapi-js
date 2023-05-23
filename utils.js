@@ -16,7 +16,7 @@ module.exports = {
 			console.log(`Requesting ${path} with params: `, params)
 
 		return (await request({
-			uri: `${this.endpoint + path}${Object.keys(params).length > 0 ? `?${new URLSearchParams(params).toString()}` : ''}`,
+			url: `${this.endpoint + path}${Object.keys(params).length > 0 ? `?${new URLSearchParams(params).toString()}` : ''}`,
 			json: true
 		})).body
 	},
@@ -28,7 +28,7 @@ module.exports = {
 
 		return (await request({
 			method: 'POST',
-			uri: this.endpoint + path,
+			url: this.endpoint + path,
 			body: body,
 			json: true
 		})).body
