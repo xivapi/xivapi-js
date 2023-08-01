@@ -12,119 +12,118 @@ declare module "@xivapi/js" {
     | "multi_match"
     | "query_string";
 
-  export enum Servers {
-    "Adamantine",
-    "Aegis",
-    "Alexander",
-    "Anima",
-    "Asura",
-    "Atomos",
-    "Bahamut",
-    "Balmung",
-    "Behemoth",
-    "Belias",
-    "Brynhildr",
-    "Cactuar",
-    "Carbuncle",
-    "Cerberus",
-    "Chocobo",
-    "Coeurl",
-    "Diabolos",
-    "Durandal",
-    "Excalibur",
-    "Exodus",
-    "Faerie",
-    "Famfrit",
-    "Fenrir",
-    "Garuda",
-    "Gilgamesh",
-    "Goblin",
-    "Gungnir",
-    "Hades",
-    "Hyperion",
-    "Ifrit",
-    "Ixion",
-    "Jenova",
-    "Kujata",
-    "Lamia",
-    "Leviathan",
-    "Lich",
-    "Louisoix",
-    "Malboro",
-    "Mandragora",
-    "Masamune",
-    "Mateus",
-    "Midgardsormr",
-    "Moogle",
-    "Odin",
-    "Omega",
-    "Pandaemonium",
-    "Phoenix",
-    "Ragnarok",
-    "Ramuh",
-    "Ridill",
-    "Sargatanas",
-    "Shinryu",
-    "Shiva",
-    "Siren",
-    "Tiamat",
-    "Titan",
-    "Tonberry",
-    "Typhon",
-    "Ultima",
-    "Ultros",
-    "Unicorn",
-    "Valefor",
-    "Yojimbo",
-    "Zalera",
-    "Zeromus",
-    "Zodiark",
-    "Spriggan",
-    "Twintania",
-    "Bismarck",
-    "Ravana",
-    "Sephirot",
-    "Sophia",
-    "Zurvan",
-    "Halicarnassus",
-    "Maduin",
-    "Marilith",
-    "Seraph",
-    "HongYuHai",
-    "ShenYiZhiDi",
-    "LaNuoXiYa",
-    "HuanYingQunDao",
-    "MengYaChi",
-    "YuZhouHeYin",
-    "WoXianXiRan",
-    "ChenXiWangZuo",
-    "BaiYinXiang",
-    "BaiJinHuanXiang",
-    "ShenQuanHen",
-    "ChaoFengTing",
-    "LvRenZhanQiao",
-    "FuXiaoZhiJian",
-    "Longchaoshendian",
-    "MengYuBaoJing",
-    "ZiShuiZhanQiao",
-    "YanXia",
-    "JingYuZhuangYuan",
-    "MoDuNa",
-    "HaiMaoChaWu",
-    "RouFengHaiWan",
-    "HuPoYuan",
-    "ShuiJingTa2",
-    "YinLeiHu2",
-    "TaiYangHaiAn2",
-    "YiXiuJiaDe2",
-    "HongChaChuan2",
-    "Alpha",
-    "Phantom",
-    "Raiden",
-    "Sagittarius",
-  }
+  type Servers =
+    | "Adamantine"
+    | "Aegis"
+    | "Alexander"
+    | "Anima"
+    | "Asura"
+    | "Atomos"
+    | "Bahamut"
+    | "Balmung"
+    | "Behemoth"
+    | "Belias"
+    | "Brynhildr"
+    | "Cactuar"
+    | "Carbuncle"
+    | "Cerberus"
+    | "Chocobo"
+    | "Coeurl"
+    | "Diabolos"
+    | "Durandal"
+    | "Excalibur"
+    | "Exodus"
+    | "Faerie"
+    | "Famfrit"
+    | "Fenrir"
+    | "Garuda"
+    | "Gilgamesh"
+    | "Goblin"
+    | "Gungnir"
+    | "Hades"
+    | "Hyperion"
+    | "Ifrit"
+    | "Ixion"
+    | "Jenova"
+    | "Kujata"
+    | "Lamia"
+    | "Leviathan"
+    | "Lich"
+    | "Louisoix"
+    | "Malboro"
+    | "Mandragora"
+    | "Masamune"
+    | "Mateus"
+    | "Midgardsormr"
+    | "Moogle"
+    | "Odin"
+    | "Omega"
+    | "Pandaemonium"
+    | "Phoenix"
+    | "Ragnarok"
+    | "Ramuh"
+    | "Ridill"
+    | "Sargatanas"
+    | "Shinryu"
+    | "Shiva"
+    | "Siren"
+    | "Tiamat"
+    | "Titan"
+    | "Tonberry"
+    | "Typhon"
+    | "Ultima"
+    | "Ultros"
+    | "Unicorn"
+    | "Valefor"
+    | "Yojimbo"
+    | "Zalera"
+    | "Zeromus"
+    | "Zodiark"
+    | "Spriggan"
+    | "Twintania"
+    | "Bismarck"
+    | "Ravana"
+    | "Sephirot"
+    | "Sophia"
+    | "Zurvan"
+    | "Halicarnassus"
+    | "Maduin"
+    | "Marilith"
+    | "Seraph"
+    | "HongYuHai"
+    | "ShenYiZhiDi"
+    | "LaNuoXiYa"
+    | "HuanYingQunDao"
+    | "MengYaChi"
+    | "YuZhouHeYin"
+    | "WoXianXiRan"
+    | "ChenXiWangZuo"
+    | "BaiYinXiang"
+    | "BaiJinHuanXiang"
+    | "ShenQuanHen"
+    | "ChaoFengTing"
+    | "LvRenZhanQiao"
+    | "FuXiaoZhiJian"
+    | "Longchaoshendian"
+    | "MengYuBaoJing"
+    | "ZiShuiZhanQiao"
+    | "YanXia"
+    | "JingYuZhuangYuan"
+    | "MoDuNa"
+    | "HaiMaoChaWu"
+    | "RouFengHaiWan"
+    | "HuPoYuan"
+    | "ShuiJingTa2"
+    | "YinLeiHu2"
+    | "TaiYangHaiAn2"
+    | "YiXiuJiaDe2"
+    | "HongChaChuan2"
+    | "Alpha"
+    | "Phantom"
+    | "Raiden"
+    | "Sagittarius";
 
-  export interface XIVAPIOptions {
+  interface XIVAPIOptions {
     private_key?: string;
     language?: "en" | "de" | "fr" | "ja" | "cn" | "ko";
     snake_case?: boolean;
@@ -132,29 +131,24 @@ declare module "@xivapi/js" {
     verbose?: boolean;
   }
 
-  export interface ItemResponse {
+  interface SearchResponse {
     Pagination: {
       Page: number;
       PageNext: number;
-      PagePrev: number;
+      PagePrev: number | null;
       PageTotal: number;
       Results: number;
       ResultsPerPage: number;
       ResultsTotal: number;
     };
-    Results: {
-      ID: number;
-      Icon: string;
-      Name: string;
-      Url: string;
-    }[];
+    Results: unknown[];
   }
 
-  export interface SearchParams {
+  interface SearchParams {
     /**
      * The name to search for, you can use `+` for spaces or let the API handle it for you.
      */
-    name: string;
+    name?: string;
 
     /**
      * The server to search against, this is case sensitive.
@@ -168,7 +162,7 @@ declare module "@xivapi/js" {
     page?: number;
   }
 
-  export interface DataSearchParams {
+  interface DataSearchParams {
     /**
      * Search a specific series of indexes separated by commas.
      */
@@ -253,7 +247,7 @@ declare module "@xivapi/js" {
      * await xiv.search("aiming", { indexes: ["Item", "Recipe"] }); // with params
      * ```
      */
-    public search(input: string, params?: DataSearchParams): Promise<T>;
+    public search(input: string, params?: DataSearchParams): Promise<SearchResponse>;
 
     /**
      * Obtain game content data of Final Fantasy XIV.
@@ -299,21 +293,21 @@ declare module "@xivapi/js" {
            */
           ids?: number[];
         }
-      ) => Promise<ItemResponse>;
+      ) => Promise<SearchResponse>;
 
       /**
        * Returns information about a specific object including extended information.
        * @since 0.4.2
        * @see https://xivapi.com/docs/Game-Data#servers
        */
-      servers: () => Promise<T>;
+      servers: () => Promise<string[]>;
 
       /**
        * Another list of servers grouped by their data center.
        * @since 0.4.2
        * @see https://xivapi.com/docs/Game-Data#data-center
        */
-      datacenters: () => Promise<T>;
+      datacenters: () => Promise<{ [key: string]: string[] }>;
     };
 
     /**
@@ -322,7 +316,7 @@ declare module "@xivapi/js" {
      * @see https://xivapi.com/docs/Character
      */
     public character: {
-      search: (name: string, params?: SearchParams) => Promise<T>;
+      search: (name: string, params?: SearchParams) => Promise<SearchResponse>;
       get: (
         id: number,
         params?: {
@@ -335,7 +329,7 @@ declare module "@xivapi/js" {
            * By default the `Character`, `ClassJobs`, `Minion` and `Mount` data will return, you can request more data using the `data` query.
            * @see https://xivapi.com/docs/Character#character
            */
-          data?: ["AC" | "FR" | "FC" | "FC" | "FCM" | "MIMO" | "PVP"];
+          data?: ("AC" | "FR" | "FC" | "FC" | "FCM" | "MIMO" | "PVP")[];
         }
       ) => Promise<T>;
     };
@@ -346,7 +340,7 @@ declare module "@xivapi/js" {
      * @see https://xivapi.com/docs/Free-Company
      */
     public freecompany: {
-      search: (name: string, params?: SearchParams) => Promise<T>;
+      search: (name: string, params?: SearchParams) => Promise<SearchResponse>;
       get: (
         id: number,
         params?: {
@@ -370,7 +364,7 @@ declare module "@xivapi/js" {
      * @see https://xivapi.com/docs/Linkshell
      */
     public linkshell: {
-      search: (name: string, params?: SearchParams) => Promise<T>;
+      search: (name: string, params?: SearchParams) => Promise<SearchResponse>;
       get: (id: number) => Promise<T>;
     };
 
@@ -380,7 +374,7 @@ declare module "@xivapi/js" {
      * @see https://xivapi.com/docs/PvP-Team
      */
     public pvpteam: {
-      search: (name: string, params?: SearchParams) => Promise<T>;
+      search: (name: string, params?: SearchParams) => Promise<SearchResponse>;
       get: (id: number) => Promise<T>;
     };
   }
