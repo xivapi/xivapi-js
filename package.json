@@ -26,5 +26,6 @@
   "bugs": {
     "url": "https://github.com/xivapi/xivapi-js/issues"
   },
-  "homepage": "https://github.com/xivapi/xivapi-js#readme"
+  "homepage": "https://github.com/xivapi/xivapi-js#readme",
+  "types": "./typings/index.d.ts"
 }
