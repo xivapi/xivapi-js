@@ -1,3 +1,22 @@
+import {
+  CharacterGetParams,
+  CharacterGetResult,
+  CharacterSearchParams,
+  CharacterSearchResult,
+  FreeCompanyGetParams,
+  FreeCompanyGetResult,
+  FreeCompanySearchParams,
+  FreeCompanySearchResult,
+  LinkshellGetResult,
+  LinkshellSearchParams,
+  LinkshellSearchResult,
+  PvPTeamGetResult,
+  PvPTeamSearchParams,
+  PvPTeamSearchResult,
+  SearchResult,
+} from "./utils";
+export * from "./utils";
+
 declare module "@xivapi/js" {
   type StringAlgo =
     | "custom"
@@ -12,154 +31,12 @@ declare module "@xivapi/js" {
     | "multi_match"
     | "query_string";
 
-  type Servers =
-    | "Adamantine"
-    | "Aegis"
-    | "Alexander"
-    | "Anima"
-    | "Asura"
-    | "Atomos"
-    | "Bahamut"
-    | "Balmung"
-    | "Behemoth"
-    | "Belias"
-    | "Brynhildr"
-    | "Cactuar"
-    | "Carbuncle"
-    | "Cerberus"
-    | "Chocobo"
-    | "Coeurl"
-    | "Diabolos"
-    | "Durandal"
-    | "Excalibur"
-    | "Exodus"
-    | "Faerie"
-    | "Famfrit"
-    | "Fenrir"
-    | "Garuda"
-    | "Gilgamesh"
-    | "Goblin"
-    | "Gungnir"
-    | "Hades"
-    | "Hyperion"
-    | "Ifrit"
-    | "Ixion"
-    | "Jenova"
-    | "Kujata"
-    | "Lamia"
-    | "Leviathan"
-    | "Lich"
-    | "Louisoix"
-    | "Malboro"
-    | "Mandragora"
-    | "Masamune"
-    | "Mateus"
-    | "Midgardsormr"
-    | "Moogle"
-    | "Odin"
-    | "Omega"
-    | "Pandaemonium"
-    | "Phoenix"
-    | "Ragnarok"
-    | "Ramuh"
-    | "Ridill"
-    | "Sargatanas"
-    | "Shinryu"
-    | "Shiva"
-    | "Siren"
-    | "Tiamat"
-    | "Titan"
-    | "Tonberry"
-    | "Typhon"
-    | "Ultima"
-    | "Ultros"
-    | "Unicorn"
-    | "Valefor"
-    | "Yojimbo"
-    | "Zalera"
-    | "Zeromus"
-    | "Zodiark"
-    | "Spriggan"
-    | "Twintania"
-    | "Bismarck"
-    | "Ravana"
-    | "Sephirot"
-    | "Sophia"
-    | "Zurvan"
-    | "Halicarnassus"
-    | "Maduin"
-    | "Marilith"
-    | "Seraph"
-    | "HongYuHai"
-    | "ShenYiZhiDi"
-    | "LaNuoXiYa"
-    | "HuanYingQunDao"
-    | "MengYaChi"
-    | "YuZhouHeYin"
-    | "WoXianXiRan"
-    | "ChenXiWangZuo"
-    | "BaiYinXiang"
-    | "BaiJinHuanXiang"
-    | "ShenQuanHen"
-    | "ChaoFengTing"
-    | "LvRenZhanQiao"
-    | "FuXiaoZhiJian"
-    | "Longchaoshendian"
-    | "MengYuBaoJing"
-    | "ZiShuiZhanQiao"
-    | "YanXia"
-    | "JingYuZhuangYuan"
-    | "MoDuNa"
-    | "HaiMaoChaWu"
-    | "RouFengHaiWan"
-    | "HuPoYuan"
-    | "ShuiJingTa2"
-    | "YinLeiHu2"
-    | "TaiYangHaiAn2"
-    | "YiXiuJiaDe2"
-    | "HongChaChuan2"
-    | "Alpha"
-    | "Phantom"
-    | "Raiden"
-    | "Sagittarius";
-
   interface XIVAPIOptions {
     private_key?: string;
     language?: "en" | "de" | "fr" | "ja" | "cn" | "ko";
     snake_case?: boolean;
     staging?: boolean;
     verbose?: boolean;
-  }
-
-  interface SearchResponse {
-    Pagination: {
-      Page: number;
-      PageNext: number;
-      PagePrev: number | null;
-      PageTotal: number;
-      Results: number;
-      ResultsPerPage: number;
-      ResultsTotal: number;
-    };
-    Results: unknown[];
-  }
-
-  interface SearchParams {
-    /**
-     * The name to search for, you can use `+` for spaces or let the API handle it for you.
-     */
-    name?: string;
-
-    /**
-     * The server to search against, this is case sensitive.
-     * @see https://xivapi.com/servers
-     */
-    server?: Servers;
-
-    /**
-     * Search or move to a specific page.
-     */
-    page?: number;
   }
 
   interface DataSearchParams {
@@ -227,11 +104,12 @@ declare module "@xivapi/js" {
     limit?: number;
   }
 
-  export default class XIVAPI<T = { [key: string]: any }> {
+  export default class XIVAPI {
     public readonly options: XIVAPIOptions;
     public readonly endpoint: string;
     public readonly globalParams: { [key: string]: string | number };
 
+    constructor(options: string | XIVAPIOptions);
     constructor(options: string | XIVAPIOptions, legacyOptions?: XIVAPIOptions);
 
     /**
@@ -247,7 +125,7 @@ declare module "@xivapi/js" {
      * await xiv.search("aiming", { indexes: ["Item", "Recipe"] }); // with params
      * ```
      */
-    public search(input: string, params?: DataSearchParams): Promise<SearchResponse>;
+    public search(input: string, params?: DataSearchParams): Promise<SearchResult>;
 
     /**
      * Obtain game content data of Final Fantasy XIV.
@@ -265,7 +143,7 @@ declare module "@xivapi/js" {
        * await xiv.data.get("Item", 1673);
        * ```
        */
-      get: (name: string, id: number) => Promise<T>;
+      get: (name: string, id: string | number) => Promise<{ [key: string]: any }>;
 
       /**
        * Obtain game content data of Final Fantasy XIV.
@@ -293,7 +171,7 @@ declare module "@xivapi/js" {
            */
           ids?: number[];
         }
-      ) => Promise<SearchResponse>;
+      ) => Promise<SearchResult>;
 
       /**
        * Returns information about a specific object including extended information.
@@ -316,22 +194,8 @@ declare module "@xivapi/js" {
      * @see https://xivapi.com/docs/Character
      */
     public character: {
-      search: (name: string, params?: SearchParams) => Promise<SearchResponse>;
-      get: (
-        id: number,
-        params?: {
-          /**
-           * If set to 1, the API will return more data in the response by extending out the data IDs to useful objects.
-           */
-          extended?: 1;
-
-          /**
-           * By default the `Character`, `ClassJobs`, `Minion` and `Mount` data will return, you can request more data using the `data` query.
-           * @see https://xivapi.com/docs/Character#character
-           */
-          data?: ("AC" | "FR" | "FC" | "FC" | "FCM" | "MIMO" | "PVP")[];
-        }
-      ) => Promise<T>;
+      search: (name: string, params?: CharacterSearchParams) => Promise<CharacterSearchResult>;
+      get: (id: string | number, params?: CharacterGetParams) => Promise<CharacterGetResult>;
     };
 
     /**
@@ -340,22 +204,8 @@ declare module "@xivapi/js" {
      * @see https://xivapi.com/docs/Free-Company
      */
     public freecompany: {
-      search: (name: string, params?: SearchParams) => Promise<SearchResponse>;
-      get: (
-        id: number,
-        params?: {
-          /**
-           * If set to 1, the API will return more data in the response by extending out the data IDs to useful objects.
-           */
-          extended?: 1;
-
-          /**
-           * By default only the `FreeCompany` data will return, you can request more data using the `data` query.
-           * @see https://xivapi.com/docs/Free-Company#free-company
-           */
-          data?: ["FCM"];
-        }
-      ) => Promise<T>;
+      search: (name: string, params?: FreeCompanySearchParams) => Promise<FreeCompanySearchResult>;
+      get: (id: string | number, params?: FreeCompanyGetParams) => Promise<FreeCompanyGetResult>;
     };
 
     /**
@@ -364,8 +214,8 @@ declare module "@xivapi/js" {
      * @see https://xivapi.com/docs/Linkshell
      */
     public linkshell: {
-      search: (name: string, params?: SearchParams) => Promise<SearchResponse>;
-      get: (id: number) => Promise<T>;
+      search: (name: string, params?: LinkshellSearchParams) => Promise<LinkshellSearchResult>;
+      get: (id: string | number) => Promise<LinkshellGetResult>;
     };
 
     /**
@@ -374,8 +224,8 @@ declare module "@xivapi/js" {
      * @see https://xivapi.com/docs/PvP-Team
      */
     public pvpteam: {
-      search: (name: string, params?: SearchParams) => Promise<SearchResponse>;
-      get: (id: number) => Promise<T>;
+      search: (name: string, params?: PvPTeamSearchParams) => Promise<PvPTeamSearchResult>;
+      get: (id: string | number) => Promise<PvPTeamGetResult>;
     };
   }
 }

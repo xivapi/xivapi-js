@@ -1,0 +1,28 @@
+import { CharacterSearchResult } from "./character";
+import { SearchParams, SearchResult } from "./search";
+
+export interface PvPTeamSearchParams extends SearchParams {}
+
+export interface BasicPvPTeamData {
+  Crest: string[];
+  ID: string;
+  Name: string;
+  Server: string;
+}
+
+export interface PvPTeamSearchResult extends SearchResult {
+  Results: BasicPvPTeamData[];
+}
+
+export interface PvPTeamGetResult {
+  PvPTeam: {
+    ID: string;
+    Pagination: SearchResult["Pagination"];
+    Profile: {
+      Crest: string[];
+      Name: string;
+      Server: string;
+    };
+    Results: CharacterSearchResult["Results"];
+  };
+}
