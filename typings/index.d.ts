@@ -13,6 +13,8 @@ import {
   PvPTeamGetResult,
   PvPTeamSearchParams,
   PvPTeamSearchResult,
+  SearchIndexResult,
+  SearchIndexes,
   SearchResult,
 } from "./utils";
 export * from "./utils";
@@ -43,36 +45,7 @@ declare module "@xivapi/js" {
     /**
      * Search a specific series of indexes separated by commas.
      */
-    indexes: [
-      | "Achievement"
-      | "Title"
-      | "Action"
-      | "CraftAction"
-      | "Trait"
-      | "PvPAction"
-      | "PvPTrait"
-      | "Status"
-      | "BNpcName"
-      | "ENpcResident"
-      | "Companion"
-      | "Mount"
-      | "Leve"
-      | "Emote"
-      | "InstanceContent"
-      | "Item"
-      | "Recipe"
-      | "Fate"
-      | "Quest"
-      | "ContentFinderCondition"
-      | "Balloon"
-      | "BuddyEquip"
-      | "Orchestrion"
-      | "PlaceName"
-      | "Weather"
-      | "World"
-      | "Map"
-      | "lore_finder"
-    ];
+    indexes: SearchIndexes[];
 
     /**
      * Search for lore! This is a special built search endpoint which searches a string through various lore specific content.
@@ -105,9 +78,9 @@ declare module "@xivapi/js" {
   }
 
   export default class XIVAPI {
-    public readonly options: XIVAPIOptions;
-    public readonly endpoint: string;
-    public readonly globalParams: { [key: string]: string | number };
+    private readonly options: XIVAPIOptions;
+    private readonly endpoint: string;
+    private readonly globalParams: { [key: string]: string | number };
 
     constructor(options: string | XIVAPIOptions);
     constructor(options: string | XIVAPIOptions, legacyOptions?: XIVAPIOptions);
@@ -125,7 +98,10 @@ declare module "@xivapi/js" {
      * await xiv.search("aiming", { indexes: ["Item", "Recipe"] }); // with params
      * ```
      */
-    public search(input: string, params?: DataSearchParams): Promise<SearchResult>;
+    public search(
+      input: keyof typeof SearchIndexes,
+      params?: DataSearchParams
+    ): Promise<SearchIndexResult>;
 
     /**
      * Obtain game content data of Final Fantasy XIV.
@@ -157,8 +133,8 @@ declare module "@xivapi/js" {
        * ```
        */
       list: (
-        name: string,
-        params: {
+        name: keyof typeof SearchIndexes,
+        params?: {
           /**
            * Limit the number of items returned by the API.
            * @min 100
@@ -171,7 +147,7 @@ declare module "@xivapi/js" {
            */
           ids?: number[];
         }
-      ) => Promise<SearchResult>;
+      ) => Promise<SearchIndexResult>;
 
       /**
        * Returns information about a specific object including extended information.

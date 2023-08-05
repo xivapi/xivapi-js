@@ -3,15 +3,13 @@ import { SearchParams, SearchResult } from "./search";
 
 export interface LinkshellSearchParams extends SearchParams {}
 
-export interface BasicLinkshellData {
-  Crest: string[];
-  ID: string;
-  Name: string;
-  Server: string;
-}
-
 export interface LinkshellSearchResult extends SearchResult {
-  Results: BasicLinkshellData[];
+  Results: {
+    Crest: string[];
+    ID: string;
+    Name: string;
+    Server: string;
+  }[];
 }
 
 export interface LinkshellGetResult {

@@ -3,15 +3,13 @@ import { SearchParams, SearchResult } from "./search";
 
 export interface PvPTeamSearchParams extends SearchParams {}
 
-export interface BasicPvPTeamData {
-  Crest: string[];
-  ID: string;
-  Name: string;
-  Server: string;
-}
-
 export interface PvPTeamSearchResult extends SearchResult {
-  Results: BasicPvPTeamData[];
+  Results: {
+    Crest: string[];
+    ID: string;
+    Name: string;
+    Server: string;
+  }[];
 }
 
 export interface PvPTeamGetResult {

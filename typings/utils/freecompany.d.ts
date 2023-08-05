@@ -14,15 +14,13 @@ export interface FreeCompanyGetParams {
   data?: ["FCM"];
 }
 
-export interface BasicFreeCompanyData {
-  Crest: string[];
-  ID: string;
-  Name: string;
-  Server: string;
-}
-
 export interface FreeCompanySearchResult extends SearchResult {
-  Results: BasicFreeCompanyData[];
+  Results: {
+    Crest: string[];
+    ID: string;
+    Name: string;
+    Server: string;
+  }[];
 }
 
 export interface FreeCompanyGetResult {

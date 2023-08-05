@@ -6,10 +6,6 @@ export interface AchievementsData {
   Points: number;
 }
 
-export interface AchievementsSearchResult extends SearchResult {
-  Results: { ID: number; Icon: string; Name: string; Url: string }[];
-}
-
 export interface AchievementCategoryData {
   AchievementsKind: {
     ID: number;
