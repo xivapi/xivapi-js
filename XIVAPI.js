@@ -4,6 +4,7 @@ const resources = require('./resources/'),
 	Character = require('./lib/character'),
 	FreeCompany = require('./lib/freecompany'),
 	Linkshell = require('./lib/linkshell'),
+	CWL = require('./lib/cwl'),
 	PvPTeam = require('./lib/pvpteam')
 
 class XIVAPI {
@@ -49,6 +50,7 @@ See how in https://github.com/xivapi/xivapi-js/releases/tag/v0.1.3.\n\
 		this.character = new Character(this)
 		this.freecompany = new FreeCompany(this)
 		this.linkshell = new Linkshell(this)
+		this.cwl = new CWL(this)
 		this.pvpteam = new PvPTeam(this)
 	}
 }

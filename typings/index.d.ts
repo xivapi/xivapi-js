@@ -10,6 +10,9 @@ import {
   LinkshellGetResult,
   LinkshellSearchParams,
   LinkshellSearchResult,
+  CWLGetResult,
+  CWLSearchParams,
+  CWLSearchResult,
   PvPTeamGetResult,
   PvPTeamSearchParams,
   PvPTeamSearchResult,
@@ -192,6 +195,16 @@ declare module "@xivapi/js" {
     public linkshell: {
       search: (name: string, params?: LinkshellSearchParams) => Promise<LinkshellSearchResult>;
       get: (id: string | number) => Promise<LinkshellGetResult>;
+    };
+
+    /**
+     * Search and retrieve CWL data from The Lodestone.
+     * @since 0.4.4
+     * @see https://xivapi.com/docs/Linkshell
+     */
+    public cwl: {
+      search: (name: string, params?: CWLSearchParams) => Promise<CWLSearchResult>;
+      get: (id: string | number) => Promise<CWLGetResult>;
     };
 
     /**
