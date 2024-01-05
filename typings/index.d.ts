@@ -102,7 +102,7 @@ declare module "@xivapi/js" {
      * ```
      */
     public search(
-      input: keyof typeof SearchIndexes,
+      input: string,
       params?: DataSearchParams
     ): Promise<SearchIndexResult>;
 
