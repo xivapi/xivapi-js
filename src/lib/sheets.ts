@@ -22,7 +22,7 @@ export class Sheets {
    * @see https://v2.xivapi.com/api/docs#tag/sheets/get/sheet
    */
   async all(): Promise<Models.ListResponse> {
-    const { data, errors } = await request({ path: "/sheet", options: this.options });
+    const { data, errors } = await request({ path: "/sheet", params: {}, options: this.options });
     if (errors) throw new CustomError(errors[0].message);
     return data as Models.ListResponse;
   }

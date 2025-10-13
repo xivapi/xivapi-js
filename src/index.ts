@@ -1,10 +1,12 @@
-export * from "./lib/assets";
-export * from "./lib/search";
-export * from "./lib/sheets";
-export * from "./lib/versions";
+export * from "./lib";
 
 export namespace XIVAPI {
   export interface Options {
+    /**
+     * The supported version of the game to use for the API.
+     * @default "latest"
+     */
+    version?: string;
     /**
      * Language to use for the API.
      */
@@ -119,7 +121,7 @@ export namespace Models {
    * Queries are formed of clauses, which take the basic form of `[specifier][operation][value]`, i.e. `Name="Example"`. Multiple clauses may be specified by seperating them with whitespace, i.e. `Foo=1 Bar=2`.
    * @see https://v2.xivapi.com/api/docs#model/querystring
    */
-  export type QueryString = string | null;
+  export type QueryString = string | string[] | Record<string, string | number | boolean> | URLSearchParams | null;
 
   /**
    * Query parameters accepted by endpoints that retrieve excel row data.
@@ -171,7 +173,7 @@ export namespace Models {
    * Filters are comprised of a comma-seperated list of field paths, i.e. `a,b` will select the fields `a` and `b`.
    * @see https://v2.xivapi.com/api/docs#model/filterstring
    */
-  export type FilterString = string;
+  export type FilterString = string | string[];
 
   /**
    * Response structure for the search endpoint.

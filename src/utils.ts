@@ -24,13 +24,24 @@ export const request = async (payload: RequestPayload): Promise<RequestPayload> 
 
   const url = new URL(path instanceof URL ? path.toString() : path.replace(/^\/+/, ""), endpoint);
   if (params) {
+    const array: Record<string, string> = { query: " ", fields: ",", transient: "," };
+    for (const key in array) {
+      if (Object.prototype.hasOwnProperty.call(params, key) && Array.isArray(params[key])) {
+        params[key] = params[key].join(array[key]);
+      }
+    }
+
     url.search = new URLSearchParams(params).toString();
-    
+
     if (!params.language) {
       if (options && options.language) url.searchParams.set("language", options.language);
     }
+
+    if (!params.version) {
+      if (options && options.version) url.searchParams.set("version", options.version);
+    }
   }
-  
+
   const response = await fetch(url);
   if (options && options.verbose) console.debug(`Requesting ${path} with params:`, params);
 
@@ -39,7 +50,6 @@ export const request = async (payload: RequestPayload): Promise<RequestPayload> 
     if (contentType && contentType.includes("application/json")) {
       payload.data = await response.json();
     } else {
-      // For binary data (images, etc.)
       payload.data = Buffer.from(await response.arrayBuffer());
     }
   } else {
