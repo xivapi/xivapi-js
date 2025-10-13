@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "@xivapi/js",
   "version": "0.4.5",
   "description": "A Node.JS wrapper for xivapi.com",
@@ -6,12 +7,15 @@
   "directories": {
     "lib": "lib"
   },
-  "dependencies": {
-    "@root/request": "^1.9.2"
+  "devDependencies": {
+    "@types/node": "^24.7.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
   },
-  "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "test": "vitest"
   },
   "repository": {
     "type": "git",
