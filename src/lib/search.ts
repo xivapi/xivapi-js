@@ -1,4 +1,4 @@
-import type { Models, XIVAPI } from "..";
+import type { Models, xivapi} from "..";
 import { CustomError, request } from "../utils";
 
 /**
@@ -6,10 +6,10 @@ import { CustomError, request } from "../utils";
  * @see https://v2.xivapi.com/api/docs#tag/search
  */
 export class Search {
-  private readonly options: XIVAPI.Options;
+  private readonly options: xivapi.Options;
 
   constructor(
-    options: XIVAPI.Options = {
+    options: xivapi.Options = {
       language: "en",
       verbose: false,
     }

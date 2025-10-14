@@ -1,6 +1,116 @@
-export * from "./lib";
+import { Assets, Search, Sheets, Versions } from "./lib";
+import { CustomError } from "./utils";
 
-export namespace XIVAPI {
+export type NumberResolvable = number | string;
+
+class xivapiSheet<T extends Models.SchemaSpecifier> {
+  private readonly type: T;
+
+  constructor(sheet: T) {
+    this.type = sheet;
+  }
+
+  /**
+   * Gets a single row from the sheet.
+   * @param {NumberResolvable} id The row to fetch.
+   * @param {Models.RowReaderQuery} [params] The parameters to fetch the row with.
+   * @returns {Promise<Models.RowResponse>} A single row with typed fields.
+   * @see https://v2.xivapi.com/api/docs#tag/sheets/get/sheet/{sheet}/{row}
+   */
+  public get(
+    id: NumberResolvable,
+    params: Models.RowReaderQuery = {}
+  ): Promise<Models.RowResponse> {
+    try {
+      if (typeof id !== "string") id = id.toString();
+      return new Sheets().get(this.type, id, params);
+    } catch (error) {
+      throw new CustomError(error instanceof Error ? error.message : "Unknown error");
+    }
+  }
+
+  /**
+   * Gets a list of rows from the sheet.
+   * @param {Models.SheetQuery} [params] The parameters to fetch the rows with.
+   * @returns {Promise<Models.SheetResponse>} A list of rows with typed fields.
+   * @see https://v2.xivapi.com/api/docs#tag/sheets/get/sheet/{sheet}
+   */
+  public list(params: Models.SheetQuery = {}): Promise<Models.SheetResponse> {
+    try {
+      return new Sheets().list(this.type, params);
+    } catch (error) {
+      throw new CustomError(error instanceof Error ? error.message : "Unknown error");
+    }
+  }
+}
+
+export default class xivapi {
+  private readonly options: xivapi.Options;
+
+  /**
+   * A wrapper for the XIVAPI v2 API.
+   * @param {xivapi.Options} [options] The client options to fetch with.
+   * @see https://v2.xivapi.com/api/docs
+   * @since 0.5.0
+   */
+  constructor(
+    options: xivapi.Options = {
+      version: "latest",
+      language: "en",
+      verbose: false,
+    }
+  ) {
+    this.options = options;
+  }
+
+  /**
+   * @since 0.5.0
+   */
+  public get achievements() {
+    return new xivapiSheet("Achievement");
+  }
+
+  /**
+   * @since 0.5.0
+   */
+  public get items() {
+    return new xivapiSheet("Item");
+  }
+
+  /**
+   * Raw endpoints for the API. Please consider using the typed endpoints instead.
+   * @see https://v2.xivapi.com/api/docs
+   * @since 0.5.0
+   */
+  public data = {
+    /**
+     * @see https://v2.xivapi.com/api/docs#tag/assets
+     * @since 0.5.0
+     */
+    assets: () => new Assets(),
+
+    /**
+     * @see https://v2.xivapi.com/api/docs#tag/search
+     * @since 0.5.0
+     */
+    search: () => new Search(this.options),
+
+    /**
+     * @see https://v2.xivapi.com/api/docs#tag/sheets
+     * @since 0.5.0
+     */
+    sheets: () => new Sheets(this.options),
+
+    /**
+     * @see https://v2.xivapi.com/api/docs#tag/versions
+     * @since 0.5.0
+     */
+    versions: () =>
+      new Versions().all().then((versions) => versions.versions.map((version) => version.names[0])),
+  };
+}
+
+export namespace xivapi {
   export interface Options {
     /**
      * The supported version of the game to use for the API.
@@ -121,7 +231,12 @@ export namespace Models {
    * Queries are formed of clauses, which take the basic form of `[specifier][operation][value]`, i.e. `Name="Example"`. Multiple clauses may be specified by seperating them with whitespace, i.e. `Foo=1 Bar=2`.
    * @see https://v2.xivapi.com/api/docs#model/querystring
    */
-  export type QueryString = string | string[] | Record<string, string | number | boolean> | URLSearchParams | null;
+  export type QueryString =
+    | string
+    | string[]
+    | Record<string, string | number | boolean>
+    | URLSearchParams
+    | null;
 
   /**
    * Query parameters accepted by endpoints that retrieve excel row data.

@@ -1,4 +1,4 @@
-import type {Models} from "..";
+import type { Models } from "..";
 import { CustomError, request } from "../utils";
 
 /**
@@ -24,7 +24,9 @@ export class Assets {
    * @returns {Promise<Buffer>} An image of the map.
    * @see https://v2.xivapi.com/api/docs#tag/assets/get/asset/map/{territory}/{index}
    */
-  async map(params: Models.MapPath & Models.VersionQuery & Pick<Models.AssetQuery, 'format'>): Promise<Buffer> {
+  async map(
+    params: Models.MapPath & Models.VersionQuery & Pick<Models.AssetQuery, "format">
+  ): Promise<Buffer> {
     const { data, errors } = await request({ path: "/asset/map", params });
     if (errors) throw new CustomError(errors[0].message);
     return data as Buffer;

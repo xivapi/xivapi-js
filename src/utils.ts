@@ -1,4 +1,4 @@
-import type { Models, XIVAPI } from ".";
+import type { Models, xivapi } from ".";
 
 export const endpoint = "https://v2.xivapi.com/api/";
 
@@ -16,7 +16,7 @@ export interface RequestPayload {
   data?: unknown;
   params?: Record<string, any>;
   errors?: Models.ErrorResponse[];
-  options?: XIVAPI.Options;
+  options?: xivapi.Options;
 }
 
 export const request = async (payload: RequestPayload): Promise<RequestPayload> => {
@@ -55,6 +55,8 @@ export const request = async (payload: RequestPayload): Promise<RequestPayload> 
   } else {
     payload.errors = [(await response.json()) as Models.ErrorResponse];
   }
+
+  if (options && options.verbose) console.debug(`${response.ok ? "Success" : "Error"} on ${path} with params:`, params);
 
   return payload;
 };
