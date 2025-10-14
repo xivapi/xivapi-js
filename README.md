@@ -3,75 +3,107 @@
 [![npm version](https://badge.fury.io/js/%40xivapi%2Fjs.svg)](https://badge.fury.io/js/%40xivapi%2Fjs)
 [![license](https://img.shields.io/github/license/xivapi/xivapi-js.svg)](LICENSE)
 
-This is a pure JS wrapper for interacting with [XIVAPI](https://xivapi.com/) and handling all requests in a simple, promise-driven manner.
+A pure JS wrapper for interacting with [XIVAPI v2](https://v2.xivapi.com/) 
+and handling all requests in a simple, promise-driven manner.
 
 ## Installation
-
-Simply add the module to your node project with `npm`:
-```
-npm i @xivapi/js
+```bash
+npm install @xivapi/js
 ```
 
-## Usage
+## Quick Start
 
-Require and initialize the module in your code:
-```js
-const XIVAPI = require('@xivapi/js')
-const xiv = new XIVAPI()
-```
-
-...and then check out the [wiki](https://github.com/xivapi/xivapi-js/wiki) for usage help!
-
-If you get really stuck and need some help, or run into any problems/concerns, either open up an issue on github or join the [XIVAPI discord server](https://discord.gg/MFFVHWC) and ping/DM @kaimoe.
-
-### Examples:
-
-Find an item's ID:
-```js
-const getID = async () => {
-  //find item
-  let res = await xiv.search('Stuffed Khloe')
-
-  //return item ID
-  return res.Results[0].ID
-}
-```
-
-Search for an FC and get an list of members:
 ```javascript
-const getMembers = async () => {
-  //find the FC with its name and server
-  let res = await xiv.freecompany.search('My Fun FC', {server: 'Excalibur'})
+import xivapi from '@xivapi/js';
 
-  //get the FC ID
-  let id = res.Results[0].ID
+const xiv = new xivapi();
 
-  //get and return fc members
-  let fc = await xiv.freecompany.get('9231253336202687179', {data: FCM})
-  return fc.FreeCompanyMembers
-}
+// Get a specific item
+const item = await xiv.items.get(1);
+console.log(item.fields.Name); // "Gil"
+
+// Search for items
+const search = xiv.data.search();
+const data = await search.get({
+  query: 'Name~"sword"',
+  sheets: "Item",
+  limit: 5
+});
+console.log(data.results);
 ```
 
-Check for character ownership using a token we generated and provided to the user:
-```js
-const verifyCharacter = async () => {
-  //find the character with their name and server
-  let res = await xiv.character.search('Kai Megumi', {server: 'excalibur'}) //case insensitive server names, btw ;)
+## Examples
 
-  //get the character
-  let char = res.Results[0]
+### Get Item Data
+```javascript
+// Get item by ID
+const item = await xiv.items.get(1, {
+  fields: "Name,LevelItem,ItemUICategory",
+  language: "en"
+});
 
-  //return whether or not the character's lodestone bio matches our token
-  return char.Bio === 'example_token'
-}
+// List items with pagination
+const items = await xiv.items.list({ limit: 10 });
 ```
 
-## Contribute
+### Search Game Data
+```javascript
+const search = xiv.data.search();
 
-Feel free to open up issues/PRs or anything else.
+// Find items by name
+const swords = await search.get({
+  query: 'Name~"sword"',
+  sheets: "Item",
+  limit: 5
+});
 
-Just `git clone https://github.com/xivapi/xivapi-js.git`, run `npm i`, and go to town!
+// Find high-level items
+const highLevelItems = await search.get({
+  query: "LevelItem>=90",
+  sheets: "Item",
+  limit: 10
+});
+
+// Search across multiple sheets
+const results = await search.get({
+  query: 'Name~"fire"',
+  sheets: "Action,Item",
+  limit: 5
+});
+```
+
+### Get Achievement Data
+```javascript
+// Get achievement by ID
+const achievement = await xiv.achievements.get(1, {
+  fields: "Name,Description",
+  language: "en"
+});
+
+// List achievements
+const achievements = await xiv.achievements.list({ limit: 5 });
+```
+
+### Custom Client Options
+```javascript
+const xiv = new xivapi({
+  language: "ja",    // Japanese
+  version: "latest",
+  verbose: true
+});
+```
+
+### Get Game Assets
+```javascript
+const assets = xiv.data.assets();
+
+// Get item icon
+const icon = await assets.get({
+  path: "ui/icon/051000/051474_hr1.tex",
+  format: "png"
+});
+```
 
 ## License
 
-This project is open source, under the terms described in the [MIT License](LICENSE).
+MIT License - see [LICENSE](LICENSE) file for details.
