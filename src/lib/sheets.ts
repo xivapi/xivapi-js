@@ -6,7 +6,7 @@ export class Sheets {
 
   /**
    * Endpoints for reading data from the game's static relational data store.
-   * @param {XIVAPI.Options} [options] The options to fetch the sheets with.
+   * @param {xivapi.Options} [options] The options to fetch the sheets with.
    * @see https://v2.xivapi.com/api/docs#tag/sheets
    */
   public constructor(
