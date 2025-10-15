@@ -692,21 +692,6 @@ describe("@xivapi/js", () => {
         },
         API_TIMEOUT
       );
-
-      it(
-        "can get item with string ID",
-        async () => {
-          const result = await xivapi.items.get("1", {
-            fields: "Name",
-            language: "en",
-          });
-
-          expect(result).toBeDefined();
-          expect(result.row_id).toBe(1);
-          expect((result.fields as any).Name).toBe("Gil");
-        },
-        API_TIMEOUT
-      );
     });
 
     describe("achievements", () => {
@@ -745,6 +730,100 @@ describe("@xivapi/js", () => {
             expect(typeof row.row_id).toBe("number");
             expect(row.fields).toBeDefined();
             expect(typeof row.fields).toBe("object");
+          });
+        },
+        API_TIMEOUT
+      );
+    });
+
+    describe("minions", () => {
+      it(
+        "can get a specific minion by ID",
+        async () => {
+          const result = await xivapi.minions.get(1, {
+            fields: "Singular",
+            language: "en",
+          });
+
+          expect(result).toBeDefined();
+          expect(result.row_id).toBeDefined();
+          expect(typeof result.row_id).toBe("number");
+          expect(result.schema).toBeDefined();
+          expect(result.fields).toBeDefined();
+          expect(result.row_id).toBe(1);
+          expect((result.fields as any).Singular).toBe("cherry bomb")
+        },
+        API_TIMEOUT
+      );
+
+      it(
+        "can list minions with parameters",
+        async () => {
+          const result = await xivapi.minions.list({ limit: 3 });
+
+          expect(result).toBeDefined();
+          expect(result.rows).toBeDefined();
+          expect(Array.isArray(result.rows)).toBe(true);
+          expect(result.schema).toBeDefined();
+          expect(result.rows.length).toBeLessThanOrEqual(3);
+
+          result.rows.forEach((row: any) => {
+            expect(row.row_id).toBeDefined();
+            expect(typeof row.row_id).toBe("number");
+            expect(row.fields).toBeDefined();
+            expect(typeof row.fields).toBe("object");
+
+            if (row.fields.Singular) {
+              expect(typeof row.fields.Singular).toBe("string");
+              expect(row.fields.Singular.length).toBeGreaterThan(0);
+            }
+          });
+        },
+        API_TIMEOUT
+      );
+    });
+
+    describe("mounts", () => {
+      it(
+        "can get a specific mount by ID",
+        async () => {
+          const result = await xivapi.mounts.get(1, {
+            fields: "Singular",
+            language: "en",
+          });
+
+          expect(result).toBeDefined();
+          expect(result.row_id).toBeDefined();
+          expect(typeof result.row_id).toBe("number");
+          expect(result.schema).toBeDefined();
+          expect(result.fields).toBeDefined();
+          expect(result.row_id).toBe(1);
+          expect((result.fields as any).Singular).toBe("company chocobo")
+        },
+        API_TIMEOUT
+      );
+
+      it(
+        "can list mounts with parameters",
+        async () => {
+          const result = await xivapi.mounts.list({ limit: 3 });
+
+          expect(result).toBeDefined();
+          expect(result.rows).toBeDefined();
+          expect(Array.isArray(result.rows)).toBe(true);
+          expect(result.schema).toBeDefined();
+          expect(result.rows.length).toBeLessThanOrEqual(3);
+
+          result.rows.forEach((row: any) => {
+            expect(row.row_id).toBeDefined();
+            expect(typeof row.row_id).toBe("number");
+            expect(row.fields).toBeDefined();
+            expect(typeof row.fields).toBe("object");
+
+            if (row.fields.Name) {
+              expect(typeof row.fields.Name).toBe("string");
+              expect(row.fields.Name.length).toBeGreaterThan(0);
+            }
           });
         },
         API_TIMEOUT

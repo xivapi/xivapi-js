@@ -73,6 +73,20 @@ export default class xivapi {
   /**
    * @since 0.5.0
    */
+  public get minions() {
+    return new xivapiSheet("Companion");
+  }
+
+  /**
+   * @since 0.5.0
+   */
+  public get mounts() {
+    return new xivapiSheet("Mount");
+  }
+
+  /**
+   * @since 0.5.0
+   */
   public get items() {
     return new xivapiSheet("Item");
   }
