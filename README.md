@@ -3,106 +3,106 @@
 [![npm version](https://badge.fury.io/js/%40xivapi%2Fjs.svg)](https://badge.fury.io/js/%40xivapi%2Fjs)
 [![license](https://img.shields.io/github/license/xivapi/xivapi-js.svg)](LICENSE)
 
-A pure JS wrapper for interacting with [XIVAPI v2](https://v2.xivapi.com/) 
-and handling all requests in a simple, promise-driven manner.
+A JavaScript library for working with [XIVAPI v2](https://v2.xivapi.com/), providing a source of Final Fantasy XIV game data. It lets you fetch, search, and use FFXIV data easily in a promise-based manner.
+
+> [!WARNING]
+> `@xivapi/js@0.4.5` (using XIVAPI v1) is now deprecated. Please use it at your own risk. We strongly recommend you update to the latest version. Migration guide and details: https://v2.xivapi.com/docs/migrate/.
+
+If you need help or run into any issues, please [open an issue](https://github.com/xivapi/xivapi-js/issues) on GitHub or join the [XIVAPI Discord server](https://discord.gg/MFFVHWC) for support.
 
 ## Installation
+
 ```bash
-npm install @xivapi/js
+npm install @xivapi/js@latest    # or use yarn, pnpm, or bun
 ```
 
-## Quick Start
+## Usage Examples
 
-```javascript
+#### 1. Importing and Initialization
+
+```js
 import xivapi from '@xivapi/js';
 
+// Basic instance
 const xiv = new xivapi();
 
-// Get a specific item
+// With options
+const xivCustom = new xivapi({
+  version: "7.0",    // specify game version
+  language: "jp",    // specify language (jp, en, de, fr)
+  verbose: true      // output more logging
+});
+```
+
+#### 2. Get an Item
+
+```js
+// Fetch the Gil item (item ID 1)
 const item = await xiv.items.get(1);
-console.log(item.fields.Name); // "Gil"
 
-// Search for items
-const search = xiv.data.search();
-const data = await search.get({
-  query: 'Name~"sword"',
-  sheets: "Item",
-  limit: 5
-});
-console.log(data.results);
+console.log(item.Name); // "Gil" (or equivalent in your language)
 ```
 
-## Examples
+#### 3. Search Example
 
-### Get Item Data
-```javascript
-// Get item by ID
-const item = await xiv.items.get(1, {
-  fields: "Name,LevelItem,ItemUICategory",
-  language: "en"
-});
+```js
+// Find all items named "gil"
+const params = {
+  query: 'Name~"gil"',
+  sheets: "Item"
+};
 
-// List items with pagination
-const items = await xiv.items.list({ limit: 10 });
+const { results } = await xiv.search(params);
+console.log(results[0]);
+
+/*
+Output example:
+{
+  "score": 1,
+  "sheet": "Item",
+  "row_id": 1,
+  "fields": {
+    "Icon": {
+      "id": 65002,
+      "path": "ui/icon/065000/065002.tex",
+      "path_hr1": "ui/icon/065000/065002_hr1.tex"
+    },
+    "Name": "Gil",
+    "Singular": "gil"
+  }
+}
+*/
 ```
 
-### Search Game Data
-```javascript
-const search = xiv.data.search();
+#### 4. Using Raw XIVAPI v2 Endpoints
 
-// Find items by name
-const swords = await search.get({
-  query: 'Name~"sword"',
-  sheets: "Item",
-  limit: 5
-});
-
-// Find high-level items
-const highLevelItems = await search.get({
-  query: "LevelItem>=90",
-  sheets: "Item",
-  limit: 10
-});
-
-// Search across multiple sheets
-const results = await search.get({
-  query: 'Name~"fire"',
-  sheets: "Action,Item",
-  limit: 5
-});
-```
-
-### Get Achievement Data
-```javascript
-// Get achievement by ID
-const achievement = await xiv.achievements.get(1, {
-  fields: "Name,Description",
-  language: "en"
-});
-
-// List achievements
-const achievements = await xiv.achievements.list({ limit: 5 });
-```
-
-### Custom Client Options
-```javascript
-const xiv = new xivapi({
-  language: "ja",    // Japanese
-  version: "latest",
-  verbose: true
-});
-```
-
-### Get Game Assets
-```javascript
-const assets = xiv.data.assets();
-
-// Get item icon
-const icon = await assets.get({
+```js
+// Fetch a raw asset file (e.g. icon image)
+const asset = await xiv.data.assets.get({
   path: "ui/icon/051000/051474_hr1.tex",
-  format: "png"
+  format: "png" // jpg or webp also supported
 });
+
+// List all quests
+const quests = await xiv.data.sheets.list("Quest");
+console.log(quests);
+
+// List available game versions
+const versions = await xiv.data.versions();
+console.log(versions[0]); // e.g. "7.0"
 ```
+
+## Contributing
+
+We welcome all contributions! Whether you'd like to report a bug, suggest a feature, improve the documentation, or submit a pull request, your help is appreciated.
+
+To get started, clone the repository with: `git clone https://github.com/xivapi/xivapi-js.git`
+
+Before opening a pull request, please:
+- Make sure your code passes linting and all current tests (`npm run lint && npm test`).
+- Clearly explain your changes and reference any relevant issues in your PR description.
+
+If you have questions, suggestions, or want to discuss changes before contributing, feel free to open an issue!
 
 ## License
 
