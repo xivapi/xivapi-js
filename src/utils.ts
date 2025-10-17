@@ -22,8 +22,8 @@ export interface RequestPayload {
 export const request = async (payload: RequestPayload): Promise<RequestPayload> => {
 	const { path, params, options } = payload
 
-	if (!params?.verbose) {
-    options!.verbose = params?.verbose as boolean
+	if (!options?.verbose && params?.verbose !== undefined) {
+    options!.verbose = Boolean(params?.verbose)
     delete params?.verbose
 	}
 
