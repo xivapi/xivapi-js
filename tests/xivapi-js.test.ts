@@ -67,11 +67,6 @@ describe("@xivapi/js", () => {
     });
   };
 
-  const createSearch = (options = {}) => {
-    const client = new xivapiClient(options);
-    return client.data.search();
-  };
-
   describe("versions", () => {
     it(
       "should fetch all versions successfully",
@@ -148,8 +143,7 @@ describe("@xivapi/js", () => {
       it(
         "can find items by exact name match",
         async () => {
-          const search = createSearch();
-          const result = await search.get({
+          const result = await xivapi.search({
             query: 'Name="Iron War Axe"',
             sheets: "Item",
             limit: 5,
@@ -172,8 +166,7 @@ describe("@xivapi/js", () => {
       it(
         "can find items using partial text search",
         async () => {
-          const search = createSearch();
-          const result = await search.get({
+          const result = await xivapi.search({
             query: 'Name~"sword"',
             sheets: "Item",
             limit: 5,
@@ -194,8 +187,7 @@ describe("@xivapi/js", () => {
       it(
         "can search actions by numeric properties",
         async () => {
-          const search = createSearch();
-          const result = await search.get({
+          const result = await xivapi.search({
             query: "Recast100ms>3000",
             sheets: "Action",
             limit: 5,
@@ -218,8 +210,7 @@ describe("@xivapi/js", () => {
       it(
         "can find high-level items (>=50)",
         async () => {
-          const search = createSearch();
-          const result = await search.get({
+          const result = await xivapi.search({
             query: "LevelItem>=50",
             sheets: "Item",
             limit: 5,
@@ -240,8 +231,7 @@ describe("@xivapi/js", () => {
       it(
         "can find low-level items (<10)",
         async () => {
-          const search = createSearch();
-          const result = await search.get({
+          const result = await xivapi.search({
             query: "LevelItem<10",
             sheets: "Item",
             limit: 5,
@@ -262,8 +252,7 @@ describe("@xivapi/js", () => {
       it(
         "can find items in a level range",
         async () => {
-          const search = createSearch();
-          const result = await search.get({
+          const result = await xivapi.search({
             query: "LevelItem>=90 LevelItem<=99",
             sheets: "Item",
             limit: 5,
@@ -287,8 +276,7 @@ describe("@xivapi/js", () => {
       it(
         "can filter by boolean properties",
         async () => {
-          const search = createSearch();
-          const result = await search.get({
+          const result = await xivapi.search({
             query: "IsUntradable=true",
             sheets: "Item",
             limit: 5,
@@ -309,8 +297,7 @@ describe("@xivapi/js", () => {
       it(
         "can combine multiple search criteria",
         async () => {
-          const search = createSearch();
-          const result = await search.get({
+          const result = await xivapi.search({
             query: 'Name~"sword" LevelItem>=10 LevelItem<=50',
             sheets: "Item",
             limit: 5,
@@ -337,8 +324,7 @@ describe("@xivapi/js", () => {
       it(
         "can search across multiple sheets simultaneously",
         async () => {
-          const search = createSearch();
-          const result = await search.get({
+          const result = await xivapi.search({
             query: 'Name~"rainbow"',
             sheets: "Action,Item",
             limit: 5,
@@ -359,8 +345,7 @@ describe("@xivapi/js", () => {
       it(
         "can limit results and get pagination cursor",
         async () => {
-          const search = createSearch();
-          const result = await search.get({
+          const result = await xivapi.search({
             query: 'Name~"rainbow"',
             sheets: "Item",
             limit: 2,
@@ -383,9 +368,7 @@ describe("@xivapi/js", () => {
       it(
         "can paginate through results using cursor",
         async () => {
-          const search = createSearch();
-
-          const firstPage = await search.get({
+          const firstPage = await xivapi.search({
             query: 'Name~"sword"',
             sheets: "Item",
             limit: 2,
@@ -396,7 +379,7 @@ describe("@xivapi/js", () => {
           expect(Array.isArray(firstPage.results)).toBe(true);
 
           if (firstPage.next) {
-            const secondPage = await search.get({
+            const secondPage = await xivapi.search({
               cursor: firstPage.next,
               limit: 2,
             });
@@ -415,12 +398,7 @@ describe("@xivapi/js", () => {
       it(
         "can use custom language and verbose options",
         async () => {
-          const search = createSearch({
-            language: "ja" as const,
-            verbose: true,
-          });
-
-          const result = await search.get({
+          const result = await xivapi.search({
             query: 'Name~"sword"',
             sheets: "Item",
             limit: 3,
@@ -439,8 +417,7 @@ describe("@xivapi/js", () => {
       it(
         "can use string arrays for complex queries",
         async () => {
-          const search = createSearch();
-          const result = await search.get({
+          const result = await xivapi.search({
             query: ['Name~"sword"', "LevelItem>=10", "LevelItem<=50"],
             sheets: "Item",
             limit: 5,
@@ -465,8 +442,7 @@ describe("@xivapi/js", () => {
       it(
         "can use string arrays for simple queries",
         async () => {
-          const search = createSearch();
-          const result = await search.get({
+          const result = await xivapi.search({
             query: ['Name~"sword"'],
             sheets: "Item",
             limit: 5,
@@ -489,10 +465,8 @@ describe("@xivapi/js", () => {
       it(
         "throws error for invalid query syntax",
         async () => {
-          const search = createSearch();
-
           await expect(
-            search.get({
+            xivapi.search({
               query: "invalid query syntax that should fail",
               sheets: "Item",
             })
