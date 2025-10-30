@@ -13,7 +13,7 @@ export class Assets {
    * @see https://v2.xivapi.com/api/docs#tag/assets/get/asset
    */
 	async get(params: Models.AssetQuery): Promise<Buffer> {
-		const { data, errors } = await request({ path: "/asset", params })
+		const { data, errors } = await request({ path: "/asset", params: params as unknown as Record<string, unknown> })
 		if (errors) throw new CustomError(errors[0].message)
 		return data as Buffer
 	}
@@ -27,7 +27,7 @@ export class Assets {
 	async map(
 		params: Models.MapPath & Models.VersionQuery & Pick<Models.AssetQuery, "format">
 	): Promise<Buffer> {
-		const { data, errors } = await request({ path: "/asset/map", params })
+		const { data, errors } = await request({ path: "/asset/map", params: params as unknown as Record<string, unknown> })
 		if (errors) throw new CustomError(errors[0].message)
 		return data as Buffer
 	}
