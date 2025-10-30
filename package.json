@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "@xivapi/js",
-  "version": "0.4.5",
+  "version": "1.0.0",
   "description": "A Node.JS wrapper for xivapi.com",
   "main": "dist/index.js",
   "devDependencies": {
@@ -27,7 +27,7 @@
     "xivapi",
     "ffxiv"
   ],
-  "author": "Kim Kar <mail@kai.moe> (https://kai.moe/)",
+  "author": "Kai <mail@kai.moe> (https://kai.moe/)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/xivapi/xivapi-js/issues"
