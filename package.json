@@ -3,10 +3,7 @@
   "name": "@xivapi/js",
   "version": "0.4.5",
   "description": "A Node.JS wrapper for xivapi.com",
-  "main": "XIVAPI.js",
-  "directories": {
-    "lib": "lib"
-  },
+  "main": "dist/index.js",
   "devDependencies": {
     "@eslint/js": "^9.38.0",
     "@types/node": "^24.7.2",
@@ -36,5 +33,8 @@
     "url": "https://github.com/xivapi/xivapi-js/issues"
   },
   "homepage": "https://github.com/xivapi/xivapi-js#readme",
-  "types": "./typings/index.d.ts"
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ]
 }
