@@ -2,7 +2,35 @@ import { Assets, Sheet, Sheets, Versions } from "./lib"
 import { CustomError, request } from "./utils"
 
 export default class XIVAPI {
-	private readonly options: XIVAPI.Options
+	public readonly options: XIVAPI.Options
+
+	public readonly achievements: Sheet<"Achievement">
+	public readonly minions: Sheet<"Companion">
+	public readonly mounts: Sheet<"Mount">
+	public readonly items: Sheet<"Item">
+
+	/**
+   * Raw endpoints for the API. Please consider using the typed endpoints instead.
+   * @see https://v2.xivapi.com/api/docs
+   * @since 0.5.0
+   */
+	public readonly data = {
+		/**
+     * @see https://v2.xivapi.com/api/docs#tag/sheets
+     * @since 0.5.0
+     */
+		sheets: () => new Sheets(this.options),
+		/**
+     * @see https://v2.xivapi.com/api/docs#tag/versions
+     * @since 0.5.0
+     */
+		versions: () => new Versions().all().then((versions) => versions.versions.map((version) => version.names[0])),
+		/**
+     * @see https://v2.xivapi.com/api/docs#tag/assets
+     * @since 0.5.0
+     */
+		assets: () => new Assets(),
+	}
 
 	/**
    * A wrapper for the XIVAPI v2 API.
@@ -17,35 +45,12 @@ export default class XIVAPI {
 			verbose: false,
 		}
 	) {
+		this.achievements = new Sheet("Achievement")
+		this.minions = new Sheet("Companion")
+		this.mounts = new Sheet("Mount")
+		this.items = new Sheet("Item")
+
 		this.options = options
-	}
-
-	/**
-   * @since 0.5.0
-   */
-	public get achievements() {
-		return new Sheet("Achievement")
-	}
-
-	/**
-   * @since 0.5.0
-   */
-	public get minions() {
-		return new Sheet("Companion")
-	}
-
-	/**
-   * @since 0.5.0
-   */
-	public get mounts() {
-		return new Sheet("Mount")
-	}
-
-	/**
-   * @since 0.5.0
-   */
-	public get items() {
-		return new Sheet("Item")
 	}
 
 	/**
@@ -62,32 +67,6 @@ export default class XIVAPI {
 		})
 		if (errors) throw new CustomError(errors[0].message)
 		return data as Models.SearchResponse
-	}
-
-	/**
-   * Raw endpoints for the API. Please consider using the typed endpoints instead.
-   * @see https://v2.xivapi.com/api/docs
-   * @since 0.5.0
-   */
-	public data = {
-		/**
-     * @see https://v2.xivapi.com/api/docs#tag/assets
-     * @since 0.5.0
-     */
-		assets: () => new Assets(),
-
-		/**
-     * @see https://v2.xivapi.com/api/docs#tag/sheets
-     * @since 0.5.0
-     */
-		sheets: () => new Sheets(this.options),
-
-		/**
-     * @see https://v2.xivapi.com/api/docs#tag/versions
-     * @since 0.5.0
-     */
-		versions: () =>
-			new Versions().all().then((versions) => versions.versions.map((version) => version.names[0])),
 	}
 }
 

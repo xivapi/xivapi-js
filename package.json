@@ -3,19 +3,22 @@
   "name": "@xivapi/js",
   "version": "1.0.1",
   "description": "A Node.JS wrapper for xivapi.com",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "devDependencies": {
     "@eslint/js": "^9.38.0",
     "@types/node": "^24.7.2",
     "eslint": "^9.37.0",
     "globals": "^16.4.0",
     "ts-node": "^10.9.2",
+    "tsup": "^8.5.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.1",
     "vitest": "^3.2.4"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsup",
     "test": "vitest",
     "lint": "eslint --fix"
   },
@@ -33,7 +36,6 @@
     "url": "https://github.com/xivapi/xivapi-js/issues"
   },
   "homepage": "https://github.com/xivapi/xivapi-js#readme",
-  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ]

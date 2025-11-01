@@ -11,7 +11,7 @@ export default defineConfig([
 		languageOptions: { globals: globals.node },
 	},
 	{ files: ["**/*.js"], languageOptions: { sourceType: "commonjs" } },
-	globalIgnores(["tests/**/*.test.ts", "dist/**/*.js"]),
+	globalIgnores(["tests/**/*.test.ts", "dist/**/*.{js,cjs,mjs}"]),
 	tseslint.configs.recommended,
 	{
 		rules: {

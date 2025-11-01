@@ -29,7 +29,7 @@ const xiv = new xivapi();
 // With options
 const xivCustom = new xivapi({
   version: "7.0",    // specify game version
-  language: "jp",    // specify language (jp, en, de, fr)
+  language: "ja",    // specify language (ja, en, de, fr)
   verbose: true      // output more logging
 });
 ```
@@ -40,7 +40,7 @@ const xivCustom = new xivapi({
 // Fetch the Gil item (item ID 1)
 const item = await xiv.items.get(1);
 
-console.log(item.Name); // "Gil" (or equivalent in your language)
+console.log(item.fields.Name); // "Gil" (or equivalent in your language)
 ```
 
 #### 3. Search Example
@@ -78,13 +78,15 @@ Output example:
 
 ```js
 // Fetch a raw asset file (e.g. icon image)
-const asset = await xiv.data.assets.get({
+const assets = await xiv.data.assets();
+const asset = await assets.get({
   path: "ui/icon/051000/051474_hr1.tex",
   format: "png" // jpg or webp also supported
 });
 
 // List all quests
-const quests = await xiv.data.sheets.list("Quest");
+const sheets = await xiv.data.sheets();
+const quests = await sheets.list("Quest");
 console.log(quests);
 
 // List available game versions
