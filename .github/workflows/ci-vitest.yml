@@ -24,7 +24,7 @@ jobs:
       - name: Code coverage summary
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
-          filename: coverage/**/coverage.cobertura.xml
+          filename: coverage/coverage.cobertura.xml
       - name: Add coverage pr comment
         uses: marocchino/sticky-pull-request-comment@v2
         if: github.event_name == 'pull_request'
