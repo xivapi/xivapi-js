@@ -20,10 +20,6 @@ jobs:
         run: npm ci
       - name: Run tests
         run: npx vitest --coverage.enabled true
-      - name: Code coverage summary
-        uses: irongut/CodeCoverageSummary@v1.3.0
-        with:
-          filename: coverage/coverage.cobertura.xml
       - name: "Report Coverage"
         if: always()
         uses: davelosert/vitest-coverage-report-action@v2
