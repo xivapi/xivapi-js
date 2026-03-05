@@ -1,11 +1,12 @@
 {
-  "extends": "@tsconfig/node16/tsconfig.json",
+  "extends": "@tsconfig/node22/tsconfig.json",
   "compilerOptions": {
-    "module": "ESNext",
-    "target": "ES2022",
+    "module": "node20",
+    "target": "es2020",
     "declaration": true,
     "preserveConstEnums": true,
-    "outDir": "dist"
+    "outDir": "dist",
+    "rootDir": "."
   },
   "include": ["src/**/*"],
   "exclude": ["**/*.spec.ts"]
