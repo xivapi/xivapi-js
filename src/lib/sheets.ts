@@ -1,5 +1,5 @@
-import type { Models, XIVAPI } from ".."
-import { CustomError, request } from "../utils"
+import type { Models, XIVAPI } from "../index.js"
+import { CustomError, request } from "../utils.js"
 
 export class Sheet<T extends Models.SchemaSpecifier> {
 	private readonly type: T
@@ -15,10 +15,7 @@ export class Sheet<T extends Models.SchemaSpecifier> {
    * @returns {Promise<Models.RowResponse>} A single row with typed fields.
    * @see https://v2.xivapi.com/api/docs#tag/sheets/get/sheet/{sheet}/{row}
    */
-	public get(
-		id: string | number,
-		params: Models.RowReaderQuery = {}
-	): Promise<Models.RowResponse> {
+	public get(id: string | number, params: Models.RowReaderQuery = {}): Promise<Models.RowResponse> {
 		try {
 			if (typeof id !== "string") id = id.toString()
 			return new Sheets().get(this.type, id, params)
@@ -54,7 +51,7 @@ export class Sheets {
 		options: XIVAPI.Options = {
 			language: "en",
 			verbose: false,
-		}
+		},
 	) {
 		this.options = options
 	}
@@ -79,7 +76,7 @@ export class Sheets {
    */
 	async list(
 		sheet: Models.SchemaSpecifier,
-		params: Models.SheetQuery = {}
+		params: Models.SheetQuery = {},
 	): Promise<Models.SheetResponse> {
 		const { data, errors } = await request({
 			path: `/sheet/${sheet}`,
@@ -100,7 +97,7 @@ export class Sheets {
 	async get(
 		sheet: Models.SchemaSpecifier,
 		row: Models.RowSpecifier,
-		params: Models.RowReaderQuery = {}
+		params: Models.RowReaderQuery = {},
 	): Promise<Models.RowResponse> {
 		const { data, errors } = await request({
 			path: `/sheet/${sheet}/${row}`,

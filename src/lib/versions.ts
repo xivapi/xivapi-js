@@ -1,5 +1,5 @@
-import type { Models } from ".."
-import { CustomError, request } from "../utils"
+import type { Models } from "../index.js"
+import { CustomError, request } from "../utils.js"
 
 /**
  * Endpoints for querying metadata about the versions recorded by the boilmaster system.

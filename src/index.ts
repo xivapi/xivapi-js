@@ -1,5 +1,7 @@
-import { Assets, Sheet, Sheets, Versions } from "./lib"
-import { CustomError, request } from "./utils"
+import { Assets } from "./lib/assets.js"
+import { Sheet, Sheets } from "./lib/sheets.js"
+import { Versions } from "./lib/versions.js"
+import { CustomError, request } from "./utils.js"
 
 export default class XIVAPI {
 	public readonly options: XIVAPI.Options
@@ -24,7 +26,8 @@ export default class XIVAPI {
      * @see https://v2.xivapi.com/api/docs#tag/versions
      * @since 0.5.0
      */
-		versions: () => new Versions().all().then((versions) => versions.versions.map((version) => version.names[0])),
+		versions: () =>
+			new Versions().all().then((versions) => versions.versions.map((version) => version.names[0])),
 		/**
      * @see https://v2.xivapi.com/api/docs#tag/assets
      * @since 0.5.0
@@ -43,7 +46,7 @@ export default class XIVAPI {
 			version: "latest",
 			language: "en",
 			verbose: false,
-		}
+		},
 	) {
 		this.achievements = new Sheet("Achievement")
 		this.minions = new Sheet("Companion")

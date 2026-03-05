@@ -1,5 +1,5 @@
-import type { Models } from ".."
-import { CustomError, request } from "../utils"
+import type { Models } from "../index.js"
+import { CustomError, request } from "../utils.js"
 
 /**
  * Endpoints for accessing game data on a file-by-file basis. Commonly useful for fetching icons or other textures to display on the web.
@@ -13,7 +13,10 @@ export class Assets {
    * @see https://v2.xivapi.com/api/docs#tag/assets/get/asset
    */
 	async get(params: Models.AssetQuery): Promise<Buffer> {
-		const { data, errors } = await request({ path: "/asset", params: params as unknown as Record<string, unknown> })
+		const { data, errors } = await request({
+			path: "/asset",
+			params: params as unknown as Record<string, unknown>,
+		})
 		if (errors) throw new CustomError(errors[0].message)
 		return data as Buffer
 	}
@@ -25,9 +28,12 @@ export class Assets {
    * @see https://v2.xivapi.com/api/docs#tag/assets/get/asset/map/{territory}/{index}
    */
 	async map(
-		params: Models.MapPath & Models.VersionQuery & Pick<Models.AssetQuery, "format">
+		params: Models.MapPath & Models.VersionQuery & Pick<Models.AssetQuery, "format">,
 	): Promise<Buffer> {
-		const { data, errors } = await request({ path: "/asset/map", params: params as unknown as Record<string, unknown> })
+		const { data, errors } = await request({
+			path: "/asset/map",
+			params: params as unknown as Record<string, unknown>,
+		})
 		if (errors) throw new CustomError(errors[0].message)
 		return data as Buffer
 	}

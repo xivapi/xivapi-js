@@ -1,4 +1,4 @@
-import type { Models, XIVAPI } from "."
+import type { Models, XIVAPI } from "./index.js"
 
 export const endpoint = "https://v2.xivapi.com/api/"
 
