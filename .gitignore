@@ -8,4 +8,5 @@ node_modules/
 
 # ignore package locks and logs
 yarn.lock
+pnpm-lock.yaml
 *.log
