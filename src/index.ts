@@ -48,10 +48,10 @@ export default class XIVAPI {
 			verbose: false,
 		},
 	) {
-		this.achievements = new Sheet("Achievement")
-		this.minions = new Sheet("Companion")
-		this.mounts = new Sheet("Mount")
-		this.items = new Sheet("Item")
+		this.achievements = new Sheet("Achievement", options)
+		this.minions = new Sheet("Companion", options)
+		this.mounts = new Sheet("Mount", options)
+		this.items = new Sheet("Item", options)
 
 		this.options = options
 	}

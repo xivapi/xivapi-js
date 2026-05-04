@@ -3,9 +3,11 @@ import { CustomError, request } from "../utils.js"
 
 export class Sheet<T extends Models.SchemaSpecifier> {
 	private readonly type: T
+	private readonly options: XIVAPI.Options
 
-	constructor(sheet: T) {
+	constructor(sheet: T, options: XIVAPI.Options) {
 		this.type = sheet
+		this.options = options
 	}
 
 	/**
@@ -18,7 +20,7 @@ export class Sheet<T extends Models.SchemaSpecifier> {
 	public get(id: string | number, params: Models.RowReaderQuery = {}): Promise<Models.RowResponse> {
 		try {
 			if (typeof id !== "string") id = id.toString()
-			return new Sheets().get(this.type, id, params)
+			return new Sheets(this.options).get(this.type, id, params)
 		} catch (error) {
 			throw new CustomError(error instanceof Error ? error.message : "Unknown error")
 		}
@@ -32,7 +34,7 @@ export class Sheet<T extends Models.SchemaSpecifier> {
    */
 	public list(params: Models.SheetQuery = {}): Promise<Models.SheetResponse> {
 		try {
-			return new Sheets().list(this.type, params)
+			return new Sheets(this.options).list(this.type, params)
 		} catch (error) {
 			throw new CustomError(error instanceof Error ? error.message : "Unknown error")
 		}
