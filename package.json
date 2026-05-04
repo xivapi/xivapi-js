@@ -1,28 +1,37 @@
 {
-  "type": "module",
   "name": "@xivapi/js",
   "version": "1.0.3",
   "description": "A Node.JS wrapper for xivapi.com",
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "license": "MIT",
+  "author": "Kai <mail@kai.moe> (https://kai.moe/)",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "test": "vitest --coverage",
+    "lint": "eslint --fix",
+    "format": "prettier . --write"
+  },
   "devDependencies": {
     "@eslint/js": "^9.39.3",
     "@tsconfig/node22": "^22.0.5",
     "@types/node": "^24.12.2",
     "@vitest/coverage-v8": "^3.2.4",
     "eslint": "^9.39.4",
+    "eslint-config-prettier": "^10.1.8",
     "globals": "^16.5.0",
+    "prettier": "3.8.3",
     "ts-node": "^10.9.2",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.59.1",
     "vitest": "^3.2.4"
   },
-  "scripts": {
-    "build": "tsup",
-    "test": "vitest --coverage",
-    "lint": "eslint --fix"
+  "homepage": "https://github.com/xivapi/xivapi-js#readme",
+  "bugs": {
+    "url": "https://github.com/xivapi/xivapi-js/issues"
   },
   "repository": {
     "type": "git",
@@ -32,13 +41,10 @@
     "xivapi",
     "ffxiv"
   ],
-  "author": "Kai <mail@kai.moe> (https://kai.moe/)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/xivapi/xivapi-js/issues"
-  },
-  "homepage": "https://github.com/xivapi/xivapi-js#readme",
   "files": [
     "dist"
-  ]
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  }
 }

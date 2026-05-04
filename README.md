@@ -21,16 +21,16 @@ npm install @xivapi/js@latest    # or use yarn, pnpm, or bun
 #### 1. Importing and Initialization
 
 ```js
-import xivapi from '@xivapi/js';
+import xivapi from "@xivapi/js";
 
 // Basic instance
 const xiv = new xivapi();
 
 // With options
 const xivCustom = new xivapi({
-  version: "7.0",    // specify game version
-  language: "ja",    // specify language (ja, en, de, fr)
-  verbose: true      // output more logging
+  version: "7.0", // specify game version
+  language: "ja", // specify language (ja, en, de, fr)
+  verbose: true, // output more logging
 });
 ```
 
@@ -49,7 +49,7 @@ console.log(item.fields.Name); // "Gil" (or equivalent in your language)
 // Find all items named "gil"
 const params = {
   query: 'Name~"gil"',
-  sheets: "Item"
+  sheets: "Item",
 };
 
 const { results } = await xiv.search(params);
@@ -81,7 +81,7 @@ Output example:
 const assets = await xiv.data.assets();
 const asset = await assets.get({
   path: "ui/icon/051000/051474_hr1.tex",
-  format: "png" // jpg or webp also supported
+  format: "png", // jpg or webp also supported
 });
 
 // List all quests
@@ -101,6 +101,7 @@ We welcome all contributions! Whether you'd like to report a bug, suggest a feat
 To get started, clone the repository with: `git clone https://github.com/xivapi/xivapi-js.git`
 
 Before opening a pull request, please:
+
 - Make sure your code passes linting and all current tests (`npm run lint && npm test`).
 - Clearly explain your changes and reference any relevant issues in your PR description.
 

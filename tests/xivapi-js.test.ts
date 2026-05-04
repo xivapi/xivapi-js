@@ -618,7 +618,9 @@ describe("@xivapi/js", () => {
         async () => {
           const sheets = xivapi.data.sheets();
 
-          await expect(sheets.list("NonExistentSheetThatDoesNotExist")).rejects.toThrow();
+          await expect(
+            sheets.list("NonExistentSheetThatDoesNotExist")
+          ).rejects.toThrow();
         },
         API_TIMEOUT
       );
@@ -725,7 +727,7 @@ describe("@xivapi/js", () => {
           expect(result.schema).toBeDefined();
           expect(result.fields).toBeDefined();
           expect(result.row_id).toBe(1);
-          expect((result.fields as any).Singular).toBe("cherry bomb")
+          expect((result.fields as any).Singular).toBe("cherry bomb");
         },
         API_TIMEOUT
       );
@@ -772,7 +774,7 @@ describe("@xivapi/js", () => {
           expect(result.schema).toBeDefined();
           expect(result.fields).toBeDefined();
           expect(result.row_id).toBe(1);
-          expect((result.fields as any).Singular).toBe("company chocobo")
+          expect((result.fields as any).Singular).toBe("company chocobo");
         },
         API_TIMEOUT
       );
