@@ -820,7 +820,7 @@ describe("@xivapi/js", () => {
 
           expect(result).toBeDefined();
           expect(result.row_id).toBe(1);
-          expect((result.fields as any).Name).toBe("Gil");
+          expect((result.fields as any).Name).toBe("ギル");
         },
         API_TIMEOUT
       );
