@@ -9,14 +9,14 @@
   "devDependencies": {
     "@eslint/js": "^9.39.3",
     "@tsconfig/node22": "^22.0.5",
-    "@types/node": "^24.11.0",
+    "@types/node": "^24.12.2",
     "@vitest/coverage-v8": "^3.2.4",
-    "eslint": "^9.39.3",
+    "eslint": "^9.39.4",
     "globals": "^16.5.0",
     "ts-node": "^10.9.2",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.56.1",
+    "typescript-eslint": "^8.59.1",
     "vitest": "^3.2.4"
   },
   "scripts": {
