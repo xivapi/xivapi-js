@@ -162,23 +162,6 @@ export namespace Models {
   export type StatusCode = number;
 
   /**
-   * Path segments expected by the asset map endpoint.
-   * @see https://v2.xivapi.com/api/docs#model/mappath
-   */
-  export interface MapPath {
-    /**
-     * Index of the map within the territory. This invariably takes the form of a two-digit zero-padded number. See Map's Id field for examples of possible combinations of `territory` and `index`.
-     * @example "00"
-     */
-    index: string;
-    /**
-     * Territory of the map to be retrieved. This typically takes the form of 4 characters, [letter][number][letter][number]. See Map's Id field for examples of possible combinations of `territory` and `index`.
-     * @example "s1d1"
-     */
-    territory: string;
-  }
-
-  /**
    * Query paramters accepted by the search endpoint.
    * @see https://v2.xivapi.com/api/docs#model/searchquery
    */

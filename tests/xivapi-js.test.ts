@@ -90,13 +90,11 @@ describe("@xivapi/js", () => {
     it(
       "should fetch asset successfully",
       async () => {
-        const assetParams = {
+        const assets = xivapi.data.assets();
+        const result = await assets.get({
           path: "ui/icon/051000/051474_hr1.tex",
           format: "png",
-        };
-
-        const assets = xivapi.data.assets();
-        const result = await assets.get(assetParams);
+        });
 
         expect(result).toBeDefined();
         expect(Buffer.isBuffer(result)).toBe(true);
@@ -108,16 +106,12 @@ describe("@xivapi/js", () => {
     it(
       "should handle map requests correctly",
       async () => {
-        const mapParams = {
-          territory: "invalid",
-          index: "00",
-          version: "latest",
-          format: "png",
-        };
-
         const assets = xivapi.data.assets();
+        const result = await assets.map("s1d1", "00", { version: "latest" })
 
-        await expect(assets.map(mapParams)).rejects.toThrow();
+        expect(result).toBeDefined();
+        expect(Buffer.isBuffer(result)).toBe(true);
+        expect(result.length).toBeGreaterThan(0);
       },
       API_TIMEOUT
     );
