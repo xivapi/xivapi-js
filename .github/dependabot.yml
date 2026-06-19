@@ -5,30 +5,26 @@
 
 version: 2
 updates:
-  - package-ecosystem: "npm" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  - package-ecosystem: "npm"
+    directory: "/""
+    schedule:
+      interval: "monthly"
+    cooldown-period: 30
+    open-pull-requests-limit: 0
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch", "version-update:semver-minor"]
+    commit-message:
+      prefix: "[skip ci]"
+      include: "scope"
+    rebase-strategy: "disabled" # prevents loss of review approvals
+    milestone: 47
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
     schedule:
       interval: "weekly"
     groups:
-      types:
-        patterns:
-          - "@types/*"
-      linting:
-        patterns:
-          - "*eslint*"
-          - "prettier"
-      build:
-        patterns:
-          - "typescript"
-          - "ts-node"
-          - "vite*"
-      runtime:
+      everything:
         patterns:
           - "*"
-        exclude-patterns:
-          - "@types/*"
-          - "*eslint*"
-          - "prettier"
-          - "typescript"
-          - "ts-node"
-          - "vite*"
