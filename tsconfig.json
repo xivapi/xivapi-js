@@ -2,13 +2,13 @@
   "extends": "@tsconfig/node22/tsconfig.json",
   "compilerOptions": {
     "module": "node20",
-    "target": "es2020",
+    "target": "esnext",
     "types": ["node"],
     "declaration": true,
     "preserveConstEnums": true,
     "outDir": "dist",
     "rootDir": ".",
-    "ignoreDeprecations": "6.0", // 'baseUrl' is used in tsup, this is deprecated as of TS 7.0
+    "ignoreDeprecations": "6.0" // 'baseUrl' is used in tsup, this is deprecated as of TS 7.0
   },
   "include": ["src/**/*"],
   "exclude": ["**/*.spec.ts"]
