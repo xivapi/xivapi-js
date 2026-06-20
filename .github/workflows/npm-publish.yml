@@ -18,8 +18,11 @@ jobs:
       - run: npm run build
       - name: Generate provenance
         uses: actions/attest-build-provenance@v1
+        env:
+          # actions/attest-build-provenance@v1 uses Node 20
+          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
         with:
-          subject-path: "./dist"
+          subject-path: dist/**
       - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
