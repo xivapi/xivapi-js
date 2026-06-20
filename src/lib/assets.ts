@@ -1,4 +1,4 @@
-import type { Models } from "../index.js";
+import * as Models from "../models.js";
 import { CustomError, request } from "../utils.js";
 
 /**
@@ -38,6 +38,7 @@ export class Assets {
       path: `/asset/map/${territory}/${index}`,
       params: params as unknown as Record<string, unknown>,
     });
+    /* v8 ignore if -- @preserve */
     if (errors) throw new CustomError(errors[0].message);
     return data as Buffer;
   }

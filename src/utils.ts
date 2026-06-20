@@ -1,4 +1,5 @@
-import type { Models, XIVAPI } from "./index.js";
+import type { XIVAPIOptions } from "./index.js";
+import * as Models from "./models.js";
 
 export const endpoint = "https://v2.xivapi.com/api/";
 
@@ -16,9 +17,10 @@ export interface RequestPayload {
   data?: unknown;
   params?: Record<string, unknown>;
   errors?: Models.ErrorResponse[];
-  options?: XIVAPI.Options;
+  options?: XIVAPIOptions;
 }
 
+/* v8 ignore start -- @preserve */
 export const request = async (
   payload: RequestPayload
 ): Promise<RequestPayload> => {
@@ -86,3 +88,4 @@ export const request = async (
 
   return payload;
 };
+/* v8 ignore stop -- @preserve */

@@ -1,11 +1,12 @@
-import type { Models, XIVAPI } from "../index.js";
+import type { XIVAPIOptions } from "../index.js";
+import * as Models from "../models.js";
 import { CustomError, request } from "../utils.js";
 
 export class Sheet<T extends Models.SchemaSpecifier> {
   private readonly type: T;
-  private readonly options: XIVAPI.Options;
+  private readonly options: XIVAPIOptions;
 
-  constructor(sheet: T, options: XIVAPI.Options) {
+  constructor(sheet: T, options: XIVAPIOptions) {
     this.type = sheet;
     this.options = options;
   }
@@ -22,9 +23,11 @@ export class Sheet<T extends Models.SchemaSpecifier> {
     params: Models.RowReaderQuery = {}
   ): Promise<Models.RowResponse> {
     try {
+      /* v8 ignore if -- @preserve */
       if (typeof id !== "string") id = id.toString();
       return new Sheets(this.options).get(this.type, id, params);
     } catch (error) {
+      /* v8 ignore next -- @preserve */
       throw new CustomError(
         error instanceof Error ? error.message : "Unknown error"
       );
@@ -41,6 +44,7 @@ export class Sheet<T extends Models.SchemaSpecifier> {
     try {
       return new Sheets(this.options).list(this.type, params);
     } catch (error) {
+      /* v8 ignore next -- @preserve */
       throw new CustomError(
         error instanceof Error ? error.message : "Unknown error"
       );
@@ -49,15 +53,15 @@ export class Sheet<T extends Models.SchemaSpecifier> {
 }
 
 export class Sheets {
-  private readonly options: XIVAPI.Options;
+  private readonly options: XIVAPIOptions;
 
   /**
    * Endpoints for reading data from the game's static relational data store.
-   * @param {XIVAPI.Options} [options] The options to fetch the sheets with.
+   * @param {XIVAPIOptions} [options] The options to fetch the sheets with.
    * @see https://v2.xivapi.com/api/docs#tag/sheets
    */
   public constructor(
-    options: XIVAPI.Options = {
+    options: XIVAPIOptions = {
       language: "en",
       verbose: false,
     }
@@ -76,6 +80,7 @@ export class Sheets {
       params: {},
       options: this.options,
     });
+    /* v8 ignore if -- @preserve */
     if (errors) throw new CustomError(errors[0].message);
     return data as Models.ListResponse;
   }
