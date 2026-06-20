@@ -10,13 +10,16 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v7
-      # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v6
         with:
           node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
       - run: npm ci
       - run: npm run build
+      - name: Generate provenance
+        uses: actions/attest-build-provenance@v1
+        with:
+          subject-path: "./dist"
       - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
