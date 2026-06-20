@@ -1,14 +1,16 @@
 name: Publish Package to npmjs
 on:
-  release:
-    types: [published]
+  push:
+    tags:
+      - 'v*'
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       id-token: write
       attestations: write
+      packages: write
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v6
