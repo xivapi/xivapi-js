@@ -11,10 +11,12 @@
   "scripts": {
     "build": "tsdown",
     "test": "vitest --coverage",
-    "lint": "eslint --fix",
-    "format": "prettier . --write"
+    "lint": "biome check --write",
+    "lint:check": "biome check",
+    "format": "biome format --write"
   },
   "devDependencies": {
+    "@biomejs/biome": "2.5.1",
     "@eslint/js": "^10.0.1",
     "@tsconfig/node22": "^22.0.5",
     "@types/node": "^26.0.0",
@@ -38,13 +40,8 @@
     "type": "git",
     "url": "git+https://github.com/xivapi/xivapi-js.git"
   },
-  "keywords": [
-    "xivapi",
-    "ffxiv"
-  ],
-  "files": [
-    "dist"
-  ],
+  "keywords": ["xivapi", "ffxiv"],
+  "files": ["dist"],
   "engines": {
     "node": ">=20.0.0"
   }
