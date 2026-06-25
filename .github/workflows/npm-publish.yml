@@ -20,9 +20,9 @@ jobs:
       - run: npm ci
       - run: npm run build
       - name: Generate provenance
-        uses: actions/attest-build-provenance@v1
+        uses: actions/attest-build-provenance@v4
         env:
-          # actions/attest-build-provenance@v1 uses Node 20
+          # actions/attest-build-provenance@v4 uses Node 20
           ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
         with:
           subject-path: dist/**
