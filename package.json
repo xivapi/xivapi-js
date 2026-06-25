@@ -9,7 +9,7 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsup",
+    "build": "tsdown",
     "test": "vitest --coverage",
     "lint": "eslint --fix",
     "format": "prettier . --write"
@@ -25,7 +25,7 @@
     "jiti": "^2.7.0",
     "prettier": "3.8.4",
     "ts-node": "^10.9.2",
-    "tsup": "^8.5.1",
+    "tsdown": "^0.22.3",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.61.1",
     "vitest": "^4.1.9"
