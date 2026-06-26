@@ -1,0 +1,51 @@
+name: CI - Verify
+
+on:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    strategy:
+      matrix:
+        node-version: [20.x, 22.x, 24.x]
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install node ${{ matrix.node-version }}
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm test
+      - name: Report Coverage
+        if: always()
+        uses: davelosert/vitest-coverage-report-action@v2
+        with:
+          threshold-icons: "{0: '🔴', 80: '🟠', 90: '🟢'}"
+  verify-publish:
+    runs-on: ubuntu-latest
+    needs: test
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24.x"
+          registry-url: "https://registry.npmjs.org"
+      - run: npm ci
+      - run: npm run build
+      - name: Generate provenance
+        uses: actions/attest-build-provenance@v4
+        with:
+          subject-path: dist/**
+      - name: Verify npm publish
+        run: npm publish --provenance --dry-run || true

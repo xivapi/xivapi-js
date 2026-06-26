@@ -1,8 +1,10 @@
 name: Publish Package to npmjs
+
 on:
   push:
     tags:
       - "v*"
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,10 +22,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       - name: Generate provenance
-        uses: actions/attest-build-provenance@v1
-        env:
-          # actions/attest-build-provenance@v1 uses Node 20
-          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+        uses: actions/attest-build-provenance@v4
         with:
           subject-path: dist/**
       - run: npm publish --provenance --access public
