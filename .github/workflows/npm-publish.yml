@@ -1,8 +1,10 @@
 name: Publish Package to npmjs
+
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
+
 jobs:
   build:
     runs-on: ubuntu-latest
