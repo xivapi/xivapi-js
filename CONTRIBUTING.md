@@ -1,6 +1,6 @@
 # Contributing to xivapi-js
 
-Thanks for your interest in contributing! We welcome contributions of all kinds, including bug fixes, new features, documentation improvements, and &mdash; eventually &mdash; translations.
+Thanks for your interest in contributing! We welcome contributions of all kinds, including bug fixes, new features, documentation improvements, and &ndash; eventually &ndash; translations.
 
 ## How to Contribute
 
