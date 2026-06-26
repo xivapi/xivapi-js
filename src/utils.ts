@@ -29,8 +29,8 @@ export const request = async (
 
   const params: Record<string, unknown> = {
     ...(payload.params ?? {}),
-    language: payload.params?.language ?? options?.language ?? "en",
-    version: payload.params?.version ?? options?.version ?? "latest",
+    language: payload.params?.language ?? options?.language,
+    version: payload.params?.version ?? options?.version,
   };
 
   /* v8 ignore start -- @preserve */
@@ -52,6 +52,9 @@ export const request = async (
     }
   }
 
+  for (const key in params) {
+    if (params[key] === undefined) delete params[key];
+  }
   url.search = new URLSearchParams(params as Record<string, string>).toString();
 
   const response = await fetch(url, {
