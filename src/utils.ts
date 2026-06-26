@@ -1,5 +1,5 @@
 import type { XIVAPIOptions } from "./index.js";
-import * as Models from "./models.js";
+import type * as Models from "./models.js";
 
 export const endpoint = "https://v2.xivapi.com/api/";
 
@@ -26,8 +26,8 @@ export const request = async (
 ): Promise<RequestPayload> => {
   const { path, params, options } = payload;
 
-  if (!options?.verbose && params?.verbose !== undefined) {
-    options!.verbose = Boolean(params?.verbose);
+  if (options?.verbose && params?.verbose !== undefined) {
+    options.verbose = Boolean(params?.verbose);
     delete params?.verbose;
   }
 
@@ -42,10 +42,7 @@ export const request = async (
       transient: ",",
     };
     for (const key in array) {
-      if (
-        Object.prototype.hasOwnProperty.call(params, key) &&
-        Array.isArray(params[key])
-      ) {
+      if (Object.hasOwn(params, key) && Array.isArray(params[key])) {
         params[key] = (params[key] as string[]).join(array[key]);
       }
     }
@@ -55,23 +52,21 @@ export const request = async (
     ).toString();
 
     if (!params.language) {
-      if (options && options.language)
-        url.searchParams.set("language", options.language);
+      if (options?.language) url.searchParams.set("language", options.language);
     }
 
     if (!params.version) {
-      if (options && options.version)
-        url.searchParams.set("version", options.version);
+      if (options?.version) url.searchParams.set("version", options.version);
     }
   }
 
   const response = await fetch(url);
-  if (options && options.verbose)
+  if (options?.verbose)
     console.debug(`Requesting ${path} with params:`, params);
 
   if (response.ok) {
     const contentType = response.headers.get("content-type");
-    if (contentType && contentType.includes("application/json")) {
+    if (contentType?.includes("application/json")) {
       payload.data = await response.json();
     } else {
       payload.data = Buffer.from(await response.arrayBuffer());
@@ -80,7 +75,7 @@ export const request = async (
     payload.errors = [(await response.json()) as Models.ErrorResponse];
   }
 
-  if (options && options.verbose)
+  if (options?.verbose)
     console.debug(
       `${response.ok ? "Success" : "Error"} on ${path} with params:`,
       params

@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
 import XIVAPI from "../../src";
 
 describe("@xivapi/js", () => {
@@ -106,8 +106,8 @@ describe("@xivapi/js", () => {
         expect(result.fields).toBeDefined();
         expect(result.row_id).toBe(1);
 
-        expect((result.fields as any).Name).toBeDefined();
-        expect((result.fields as any).Name).toBe("Gil");
+        expect(result.fields.Name).toBeDefined();
+        expect(result.fields.Name).toBe("Gil");
       });
 
       it("can get a specific row with array-based field filtering", async () => {
@@ -125,8 +125,8 @@ describe("@xivapi/js", () => {
         expect(result.fields).toBeDefined();
         expect(typeof result.fields).toBe("object");
         expect(Object.keys(result.fields).length).toBe(2);
-        expect((result.fields as any).Name).toBeDefined();
-        expect((result.fields as any).Name).toBe("Gil");
+        expect(result.fields.Name).toBeDefined();
+        expect(result.fields.Name).toBe("Gil");
       });
 
       it("can get a specific row with custom options", async () => {
@@ -140,8 +140,8 @@ describe("@xivapi/js", () => {
         expect(result.fields).toBeDefined();
         expect(result.row_id).toBe(1);
 
-        expect((result.fields as any).Name).toBeDefined();
-        expect((result.fields as any).Name).toBe("Gil");
+        expect(result.fields.Name).toBeDefined();
+        expect(result.fields.Name).toBe("Gil");
       });
     });
   });

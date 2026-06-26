@@ -234,7 +234,7 @@ export interface SheetQuery {
 /**
  * @see https://v2.xivapi.com/api/docs#model/rowspecifier
  */
-export type RowSpecifier = string; // `^\d+(:\d+)?$`
+export type RowSpecifier = string | number; // `^\d+(:\d+)?$`
 
 /**
  * Response structure for the sheet endpoint.
