@@ -36,14 +36,14 @@ const xivCustom = new xivapi({
 
 ## Examples
 
-#### 1. Get an Item
+#### Get an Item
 
 ```js
 const item = await xiv.items.get(1);
 console.log(item.fields.Name); // "Gil"
 ```
 
-#### 2. Search sheets
+#### Search sheets
 
 ```js
 const params = { query: 'Name~"gil"', sheets: "Item" };
@@ -51,7 +51,7 @@ const { results } = await xiv.search(params);
 console.log(results[0]);
 ```
 
-#### 4. Using raw XIVAPI v2 endpoints
+#### Using raw XIVAPI v2 endpoints
 
 ```js
 // Fetch an asset (e.g., icon)
