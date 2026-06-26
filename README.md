@@ -91,7 +91,7 @@ console.log(versions[0]); // e.g. "7.0"
 
 ## Contributing
 
-Contributions, bug reports, and feature requests are welcome! See [`CONTRIBUTING`](CONTRIBUTING) for guidelines on how to get started.
+Contributions, bug reports, and feature requests are welcome! See [`CONTRIBUTING.md`](CONTRIBUTING.md) for guidelines on how to get started.
 
 ## License
 
