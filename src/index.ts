@@ -1,7 +1,7 @@
 import { Assets } from "./lib/assets.js";
 import { Sheet, Sheets } from "./lib/sheets.js";
 import { Versions } from "./lib/versions.js";
-import * as Models from "./models.js";
+import type * as Models from "./models.d.ts";
 import { CustomError, request } from "./utils.js";
 
 export default class XIVAPI {
@@ -103,4 +103,4 @@ export type SearchParams = Models.SearchQuery &
   Models.VersionQuery &
   Models.RowReaderQuery & { verbose?: boolean };
 
-export { Models, XIVAPI };
+export { type Models, XIVAPI };
