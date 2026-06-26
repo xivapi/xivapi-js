@@ -47,6 +47,12 @@
   },
   "assist": {
     "enabled": true,
-    "actions": { "source": { "organizeImports": "on" } }
+    "actions": {
+      "source": {
+        "preset": "recommended",
+        "organizeImports": "on",
+        "useSortedPackageJson": "on"
+      }
+    }
   }
 }
