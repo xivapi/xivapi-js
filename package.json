@@ -2,24 +2,37 @@
   "name": "@xivapi/js",
   "version": "1.0.5",
   "description": "A Node.JS wrapper for xivapi.com",
+  "keywords": ["xivapi", "ffxiv"],
+  "homepage": "https://github.com/xivapi/xivapi-js",
+  "bugs": {
+    "url": "https://github.com/xivapi/xivapi-js/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xivapi/xivapi-js.git"
+  },
   "license": "MIT",
   "author": "Kai <mail@kai.moe> (https://kai.moe/)",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "files": ["dist"],
   "scripts": {
     "build": "tsdown",
-    "test": "vitest --coverage",
+    "format": "biome format --write",
     "lint": "biome check --write",
     "lint:check": "biome check",
-    "format": "biome format --write"
+    "test": "vitest --coverage"
+  },
+  "dependencies": {
+    "std-env": "^4.1.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.1",
     "@eslint/js": "^10.0.1",
     "@tsconfig/node22": "^22.0.5",
-    "@types/node": "^26.0.0",
+    "@types/node": "^26.0.1",
     "@vitest/coverage-v8": "^4.1.9",
     "eslint": "^10.5.0",
     "eslint-config-prettier": "^10.1.8",
@@ -32,16 +45,6 @@
     "typescript-eslint": "^8.61.1",
     "vitest": "^4.1.9"
   },
-  "homepage": "https://github.com/xivapi/xivapi-js#readme",
-  "bugs": {
-    "url": "https://github.com/xivapi/xivapi-js/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/xivapi/xivapi-js.git"
-  },
-  "keywords": ["xivapi", "ffxiv"],
-  "files": ["dist"],
   "engines": {
     "node": ">=20.0.0"
   }

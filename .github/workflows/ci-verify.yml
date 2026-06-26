@@ -27,7 +27,7 @@ jobs:
         uses: davelosert/vitest-coverage-report-action@v2
         with:
           threshold-icons: "{0: '🔴', 80: '🟠', 90: '🟢'}"
-  verify-publish:
+  publish:
     runs-on: ubuntu-latest
     needs: test
     permissions:

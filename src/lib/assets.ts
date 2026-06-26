@@ -25,20 +25,19 @@ export class Assets {
    * Retrieve the specified map, composing it from split source files if necessary.
    * @param {string} territory Territory of the map to be retrieved. This typically takes the form of 4 characters, [letter][number][letter][number]. See Map's Id field for examples of possible combinations of `territory` and `index`.
    * @param {string} index Index of the map within the territory. This invariably takes the form of a two-digit zero-padded number. See Map's Id field for examples of possible combinations of `territory` and `index`.
-   * @param {Models.MapPath & Models.VersionQuery & Models.AssetQuery} params
+   * @param {Models.VersionQuery} [params]
    * @returns {Promise<Buffer>} An image of the map.
    * @see https://v2.xivapi.com/api/docs#tag/assets/get/asset/map/{territory}/{index}
    */
   async map(
     territory: string,
     index: string,
-    params: Models.VersionQuery
+    params: Models.VersionQuery = {}
   ): Promise<Buffer> {
     const { data, errors } = await request({
       path: `/asset/map/${territory}/${index}`,
       params: params as unknown as Record<string, unknown>,
     });
-    /* v8 ignore if -- @preserve */
     if (errors) throw new CustomError(errors[0].message);
     return data as Buffer;
   }

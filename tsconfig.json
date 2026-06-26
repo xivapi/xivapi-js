@@ -1,14 +1,14 @@
 {
   "extends": "@tsconfig/node22/tsconfig.json",
   "compilerOptions": {
-    "module": "node20",
     "target": "esnext",
+    "moduleResolution": "nodenext",
     "types": ["node"],
     "declaration": true,
     "preserveConstEnums": true,
+    "resolveJsonModule": true,
     "outDir": "dist",
-    "rootDir": ".",
-    "ignoreDeprecations": "6.0" // 'baseUrl' is used in tsup, this is deprecated as of TS 7.0
+    "rootDir": "."
   },
   "include": ["src/**/*"],
   "exclude": ["**/*.spec.ts"]

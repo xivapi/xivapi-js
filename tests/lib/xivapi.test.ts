@@ -369,40 +369,6 @@ describe("@xivapi/js", () => {
   });
 
   describe("typed sheet accessors", () => {
-    describe("items", () => {
-      it("can get a specific item by ID", async () => {
-        const result = await xiv.items.get(1, {
-          fields: "Name",
-          language: "en",
-        });
-
-        expect(result).toBeDefined();
-        expect(result.row_id).toBeDefined();
-        expect(typeof result.row_id).toBe("number");
-        expect(result.schema).toBeDefined();
-        expect(result.fields).toBeDefined();
-        expect(result.row_id).toBe(1);
-        expect(result.fields.Name).toBe("Gil");
-      });
-
-      it("can list items with parameters", async () => {
-        const result = await xiv.items.list({ limit: 3 });
-
-        expect(result).toBeDefined();
-        expect(result.rows).toBeDefined();
-        expect(Array.isArray(result.rows)).toBe(true);
-        expect(result.schema).toBeDefined();
-        expect(result.rows.length).toBeLessThanOrEqual(3);
-
-        result.rows.forEach((row) => {
-          expect(row.row_id).toBeDefined();
-          expect(typeof row.row_id).toBe("number");
-          expect(row.fields).toBeDefined();
-          expect(typeof row.fields).toBe("object");
-        });
-      });
-    });
-
     describe("achievements", () => {
       it("can get a specific achievement by ID", async () => {
         const result = await xiv.achievements.get(1, {
@@ -421,6 +387,102 @@ describe("@xivapi/js", () => {
 
       it("can list achievements with parameters", async () => {
         const result = await xiv.achievements.list({ limit: 3 });
+
+        expect(result).toBeDefined();
+        expect(result.rows).toBeDefined();
+        expect(Array.isArray(result.rows)).toBe(true);
+        expect(result.schema).toBeDefined();
+        expect(result.rows.length).toBeLessThanOrEqual(3);
+
+        result.rows.forEach((row) => {
+          expect(row.row_id).toBeDefined();
+          expect(typeof row.row_id).toBe("number");
+          expect(row.fields).toBeDefined();
+          expect(typeof row.fields).toBe("object");
+        });
+      });
+    });
+
+    describe("actions", () => {
+      it("can get a specific action by ID", async () => {
+        const result = await xiv.actions.get(5);
+
+        expect(result).toBeDefined();
+        expect(result.row_id).toBeDefined();
+        expect(typeof result.row_id).toBe("number");
+        expect(result.schema).toBeDefined();
+        expect(result.fields).toBeDefined();
+        expect(result.row_id).toBe(5);
+        expect(result.fields.Name).toBe("Teleport");
+      });
+
+      it("can list achievements with parameters", async () => {
+        const result = await xiv.actions.list({ limit: 3 });
+
+        expect(result).toBeDefined();
+        expect(result.rows).toBeDefined();
+        expect(Array.isArray(result.rows)).toBe(true);
+        expect(result.schema).toBeDefined();
+        expect(result.rows.length).toBeLessThanOrEqual(3);
+
+        result.rows.forEach((row) => {
+          expect(row.row_id).toBeDefined();
+          expect(typeof row.row_id).toBe("number");
+          expect(row.fields).toBeDefined();
+          expect(typeof row.fields).toBe("object");
+        });
+      });
+    });
+
+    describe("emotes", () => {
+      it("can get a specific action by ID", async () => {
+        const result = await xiv.emotes.get(11);
+
+        expect(result).toBeDefined();
+        expect(result.row_id).toBeDefined();
+        expect(typeof result.row_id).toBe("number");
+        expect(result.schema).toBeDefined();
+        expect(result.fields).toBeDefined();
+        expect(result.row_id).toBe(11);
+        expect(result.fields.Name).toBe("Dance");
+      });
+
+      it("can list achievements with parameters", async () => {
+        const result = await xiv.emotes.list({ limit: 3 });
+
+        expect(result).toBeDefined();
+        expect(result.rows).toBeDefined();
+        expect(Array.isArray(result.rows)).toBe(true);
+        expect(result.schema).toBeDefined();
+        expect(result.rows.length).toBeLessThanOrEqual(3);
+
+        result.rows.forEach((row) => {
+          expect(row.row_id).toBeDefined();
+          expect(typeof row.row_id).toBe("number");
+          expect(row.fields).toBeDefined();
+          expect(typeof row.fields).toBe("object");
+        });
+      });
+    });
+
+    describe("items", () => {
+      it("can get a specific item by ID", async () => {
+        const result = await xiv.items.get(1, {
+          fields: "Name",
+          language: "en",
+        });
+
+        expect(result).toBeDefined();
+        expect(result.row_id).toBeDefined();
+        expect(typeof result.row_id).toBe("number");
+        expect(result.schema).toBeDefined();
+        expect(result.fields).toBeDefined();
+        expect(result.row_id).toBe(1);
+        expect(result.fields.Name).toBe("Gil");
+      });
+
+      it("can list items with parameters", async () => {
+        const result = await xiv.items.list({ limit: 3 });
 
         expect(result).toBeDefined();
         expect(result.rows).toBeDefined();

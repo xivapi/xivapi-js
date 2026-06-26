@@ -13,12 +13,12 @@ If you need help or run into any issues, please [open an issue](https://github.c
 ## Installation
 
 ```bash
-npm install @xivapi/js@latest    # or use yarn, pnpm, or bun
+npm install @xivapi/js
 ```
 
-## Usage Examples
+Supports Node, Bun, Deno, and modern bundlers.
 
-#### 1. Importing and Initialization
+## Quick Start
 
 ```js
 import xivapi from "@xivapi/js";
@@ -34,29 +34,24 @@ const xivCustom = new xivapi({
 });
 ```
 
-#### 2. Get an Item
+## Examples
+
+#### Get an Item
 
 ```js
-// Fetch the Gil item (item ID 1)
 const item = await xiv.items.get(1);
-
-console.log(item.fields.Name); // "Gil" (or equivalent in your language)
+console.log(item.fields.Name); // "Gil"
 ```
 
-#### 3. Search Example
+#### Search sheets
 
 ```js
-// Find all items named "gil"
-const params = {
-  query: 'Name~"gil"',
-  sheets: "Item",
-};
-
+const params = { query: 'Name~"gil"', sheets: "Item" };
 const { results } = await xiv.search(params);
 console.log(results[0]);
 
 /*
-Output example:
+Output:
 {
   "score": 1,
   "sheet": "Item",
@@ -74,17 +69,17 @@ Output example:
 */
 ```
 
-#### 4. Using Raw XIVAPI v2 Endpoints
+#### Using raw XIVAPI v2 endpoints
 
 ```js
-// Fetch a raw asset file (e.g. icon image)
+// Fetch an asset (e.g., icon)
 const assets = await xiv.data.assets();
 const asset = await assets.get({
   path: "ui/icon/051000/051474_hr1.tex",
   format: "png", // jpg or webp also supported
 });
 
-// List all quests
+// List all rows from the "Quest" sheet
 const sheets = await xiv.data.sheets();
 const quests = await sheets.list("Quest");
 console.log(quests);
@@ -96,17 +91,8 @@ console.log(versions[0]); // e.g. "7.0"
 
 ## Contributing
 
-We welcome all contributions! Whether you'd like to report a bug, suggest a feature, improve the documentation, or submit a pull request, your help is appreciated.
-
-To get started, clone the repository with: `git clone https://github.com/xivapi/xivapi-js.git`
-
-Before opening a pull request, please:
-
-- Make sure your code passes linting and all current tests (`npm run lint && npm test`).
-- Clearly explain your changes and reference any relevant issues in your PR description.
-
-If you have questions, suggestions, or want to discuss changes before contributing, feel free to open an issue!
+Contributions, bug reports, and feature requests are welcome! See [`CONTRIBUTING`](CONTRIBUTING) for guidelines on how to get started.
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See [`LICENSE`](LICENSE) for details.

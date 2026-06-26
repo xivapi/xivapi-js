@@ -1,3 +1,5 @@
+import { runtime } from "std-env";
+import pkg from "../package.json" with { type: "json" };
 import type { XIVAPIOptions } from "./index.js";
 import type * as Models from "./models.js";
 
@@ -20,67 +22,78 @@ export interface RequestPayload {
   options?: XIVAPIOptions;
 }
 
-/* v8 ignore start -- @preserve */
 export const request = async (
   payload: RequestPayload
 ): Promise<RequestPayload> => {
-  const { path, params, options } = payload;
+  const { path, options } = payload;
 
-  if (options?.verbose && params?.verbose !== undefined) {
-    options.verbose = Boolean(params?.verbose);
-    delete params?.verbose;
+  const params: Record<string, unknown> = {
+    ...(payload.params ?? {}),
+    language: payload.params?.language ?? options?.language,
+    version: payload.params?.version ?? options?.version,
+  };
+
+  /* v8 ignore start -- @preserve */
+  if (options?.verbose && "verbose" in params) {
+    options.verbose = Boolean(params.verbose);
+    delete params.verbose;
   }
+  /* v8 ignore stop -- @preserve */
 
   const url = new URL(
     path instanceof URL ? path.toString() : path.replace(/^\/+/, ""),
     endpoint
   );
-  if (params) {
-    const array: Record<string, string> = {
-      query: " ",
-      fields: ",",
-      transient: ",",
-    };
-    for (const key in array) {
-      if (Object.hasOwn(params, key) && Array.isArray(params[key])) {
-        params[key] = (params[key] as string[]).join(array[key]);
-      }
-    }
 
-    url.search = new URLSearchParams(
-      params as Record<string, string>
-    ).toString();
-
-    if (!params.language) {
-      if (options?.language) url.searchParams.set("language", options.language);
-    }
-
-    if (!params.version) {
-      if (options?.version) url.searchParams.set("version", options.version);
+  const joiners = { query: " ", fields: ",", transient: "," };
+  for (const key in joiners) {
+    if (Array.isArray(params[key])) {
+      params[key] = params[key].join((joiners as Record<string, string>)[key]);
     }
   }
 
-  const response = await fetch(url);
-  if (options?.verbose)
-    console.debug(`Requesting ${path} with params:`, params);
+  for (const key in params) {
+    if (params[key] === undefined) delete params[key];
+  }
+  url.search = new URLSearchParams(params as Record<string, string>).toString();
 
+  const response = await fetch(url, {
+    headers: {
+      "User-Agent": `${pkg.name}/${pkg.version} (${runtime}; +${pkg.homepage})`,
+    },
+  });
+
+  if (options?.verbose) {
+    console.debug(`Requesting ${path} with params:`, params);
+  }
+
+  /* v8 ignore if -- @preserve */
+  const contentType = response.headers.get("Content-Type") ?? "";
   if (response.ok) {
-    const contentType = response.headers.get("content-type");
-    if (contentType?.includes("application/json")) {
+    if (contentType.includes("application/json")) {
       payload.data = await response.json();
     } else {
       payload.data = Buffer.from(await response.arrayBuffer());
     }
-  } else {
-    payload.errors = [(await response.json()) as Models.ErrorResponse];
-  }
 
-  if (options?.verbose)
-    console.debug(
-      `${response.ok ? "Success" : "Error"} on ${path} with params:`,
-      params
-    );
+    if (options?.verbose) {
+      console.debug(`Success on ${path} with params:`, params);
+    }
+  } else {
+    /* v8 ignore start -- @preserve */
+    if (contentType.includes("application/json")) {
+      payload.errors = [(await response.json()) as Models.ErrorResponse];
+    } else {
+      payload.errors = [
+        { code: response.status, message: response.statusText },
+      ];
+    }
+
+    if (options?.verbose) {
+      console.debug(`Error on ${path} with params:`, params);
+    }
+    /* v8 ignore stop -- @preserve */
+  }
 
   return payload;
 };
-/* v8 ignore stop -- @preserve */

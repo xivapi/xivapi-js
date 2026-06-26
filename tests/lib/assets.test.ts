@@ -18,14 +18,6 @@ describe("@xivapi/js", () => {
       expect(result.length).toBeGreaterThan(0);
     });
 
-    it("should handle map requests correctly", async () => {
-      const result = await assets.map("s1d1", "00", { version: "latest" });
-
-      expect(result).toBeDefined();
-      expect(Buffer.isBuffer(result)).toBe(true);
-      expect(result.length).toBeGreaterThan(0);
-    });
-
     it("should throw CustomError when asset fetch fails", async () => {
       await expect(
         assets.get({
@@ -33,6 +25,18 @@ describe("@xivapi/js", () => {
           format: "png",
         })
       ).rejects.toThrow();
+    });
+
+    it("should handle map requests correctly", async () => {
+      const result = await assets.map("s1d1", "00");
+
+      expect(result).toBeDefined();
+      expect(Buffer.isBuffer(result)).toBe(true);
+      expect(result.length).toBeGreaterThan(0);
+    });
+
+    it("should throw CustomError when map fetch fails", async () => {
+      await expect(assets.map("invalid", "00")).rejects.toThrow();
     });
   });
 });
