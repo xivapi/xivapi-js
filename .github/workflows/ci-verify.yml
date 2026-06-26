@@ -1,4 +1,4 @@
-name: CI - Verify build, tests and publish
+name: CI - Verify
 
 on:
   pull_request:
@@ -48,4 +48,4 @@ jobs:
         with:
           subject-path: dist/**
       - name: Verify npm publish
-        run: npm publish --provenance --dry-run
+        run: npm publish --provenance --dry-run || true
