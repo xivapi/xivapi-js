@@ -91,17 +91,8 @@ console.log(versions[0]); // e.g. "7.0"
 
 ## Contributing
 
-We welcome all contributions! Whether you'd like to report a bug, suggest a feature, improve the documentation, or submit a pull request, your help is appreciated.
-
-To get started, clone the repository with: `git clone https://github.com/xivapi/xivapi-js.git`
-
-Before opening a pull request, please:
-
-- Make sure your code passes linting and all current tests (`npm run lint && npm test`).
-- Clearly explain your changes and reference any relevant issues in your PR description.
-
-If you have questions, suggestions, or want to discuss changes before contributing, feel free to open an issue!
+Contributions, bug reports, and feature requests are welcome! See [`CONTRIBUTING`](CONTRIBUTING) for guidelines on how to get started.
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See [`LICENSE`](LICENSE) for details.
