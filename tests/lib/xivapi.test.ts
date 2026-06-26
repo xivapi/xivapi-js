@@ -1,5 +1,5 @@
-import { describe, it, expect } from "vitest";
-import { XIVAPI, Models } from "../../src";
+import { describe, expect, it } from "vitest";
+import { type Models, XIVAPI } from "../../src";
 
 describe("@xivapi/js", () => {
   const xiv = new XIVAPI();
@@ -18,7 +18,7 @@ describe("@xivapi/js", () => {
 
       expect(result).toBeDefined();
       expect(result.row_id).toBe(1);
-      expect((result.fields as any).Name).toBe("ギル");
+      expect(result.fields.Name).toBe("ギル");
     });
   });
 
@@ -114,7 +114,7 @@ describe("@xivapi/js", () => {
         );
 
         expect(ironWarAxe).toBeDefined();
-        expect(ironWarAxe!.fields.Name).toBe("Iron War Axe");
+        expect(ironWarAxe?.fields.Name).toBe("Iron War Axe");
       });
 
       it("can find items using partial text search", async () => {
@@ -382,7 +382,7 @@ describe("@xivapi/js", () => {
         expect(result.schema).toBeDefined();
         expect(result.fields).toBeDefined();
         expect(result.row_id).toBe(1);
-        expect((result.fields as any).Name).toBe("Gil");
+        expect(result.fields.Name).toBe("Gil");
       });
 
       it("can list items with parameters", async () => {
@@ -394,7 +394,7 @@ describe("@xivapi/js", () => {
         expect(result.schema).toBeDefined();
         expect(result.rows.length).toBeLessThanOrEqual(3);
 
-        result.rows.forEach((row: any) => {
+        result.rows.forEach((row) => {
           expect(row.row_id).toBeDefined();
           expect(typeof row.row_id).toBe("number");
           expect(row.fields).toBeDefined();
@@ -416,7 +416,7 @@ describe("@xivapi/js", () => {
         expect(result.schema).toBeDefined();
         expect(result.fields).toBeDefined();
         expect(result.row_id).toBe(1);
-        expect((result.fields as any).Name).toBe("To Crush Your Enemies I");
+        expect(result.fields.Name).toBe("To Crush Your Enemies I");
       });
 
       it("can list achievements with parameters", async () => {
@@ -428,7 +428,7 @@ describe("@xivapi/js", () => {
         expect(result.schema).toBeDefined();
         expect(result.rows.length).toBeLessThanOrEqual(3);
 
-        result.rows.forEach((row: any) => {
+        result.rows.forEach((row) => {
           expect(row.row_id).toBeDefined();
           expect(typeof row.row_id).toBe("number");
           expect(row.fields).toBeDefined();
@@ -450,7 +450,7 @@ describe("@xivapi/js", () => {
         expect(result.schema).toBeDefined();
         expect(result.fields).toBeDefined();
         expect(result.row_id).toBe(1);
-        expect((result.fields as any).Singular).toBe("cherry bomb");
+        expect(result.fields.Singular).toBe("cherry bomb");
       });
 
       it("can list minions with parameters", async () => {
@@ -462,7 +462,7 @@ describe("@xivapi/js", () => {
         expect(result.schema).toBeDefined();
         expect(result.rows.length).toBeLessThanOrEqual(3);
 
-        result.rows.forEach((row: any) => {
+        result.rows.forEach((row) => {
           expect(row.row_id).toBeDefined();
           expect(typeof row.row_id).toBe("number");
           expect(row.fields).toBeDefined();
@@ -470,7 +470,7 @@ describe("@xivapi/js", () => {
 
           if (row.fields.Singular) {
             expect(typeof row.fields.Singular).toBe("string");
-            expect(row.fields.Singular.length).toBeGreaterThan(0);
+            expect((row.fields.Singular as string).length).toBeGreaterThan(0);
           }
         });
       });
@@ -489,7 +489,7 @@ describe("@xivapi/js", () => {
         expect(result.schema).toBeDefined();
         expect(result.fields).toBeDefined();
         expect(result.row_id).toBe(1);
-        expect((result.fields as any).Singular).toBe("company chocobo");
+        expect(result.fields.Singular).toBe("company chocobo");
       });
 
       it("can list mounts with parameters", async () => {
@@ -501,7 +501,7 @@ describe("@xivapi/js", () => {
         expect(result.schema).toBeDefined();
         expect(result.rows.length).toBeLessThanOrEqual(3);
 
-        result.rows.forEach((row: any) => {
+        result.rows.forEach((row) => {
           expect(row.row_id).toBeDefined();
           expect(typeof row.row_id).toBe("number");
           expect(row.fields).toBeDefined();
@@ -509,7 +509,7 @@ describe("@xivapi/js", () => {
 
           if (row.fields.Name) {
             expect(typeof row.fields.Name).toBe("string");
-            expect(row.fields.Name.length).toBeGreaterThan(0);
+            expect((row.fields.Name as string).length).toBeGreaterThan(0);
           }
         });
       });

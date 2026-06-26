@@ -1,8 +1,8 @@
 import { Assets } from "./lib/assets.js";
 import { Sheet, Sheets } from "./lib/sheets.js";
 import { Versions } from "./lib/versions.js";
-import { CustomError, request } from "./utils.js";
 import * as Models from "./models.js";
+import { CustomError, request } from "./utils.js";
 
 export default class XIVAPI {
   public readonly options: XIVAPIOptions;

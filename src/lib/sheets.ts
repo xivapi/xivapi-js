@@ -1,5 +1,5 @@
 import type { XIVAPIOptions } from "../index.js";
-import * as Models from "../models.js";
+import type * as Models from "../models.js";
 import { CustomError, request } from "../utils.js";
 
 export class Sheet<T extends Models.SchemaSpecifier> {
