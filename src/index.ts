@@ -16,17 +16,17 @@ export default class XIVAPI {
   /**
    * Raw endpoints for the API. Please consider using the typed endpoints instead.
    * @see https://v2.xivapi.com/api/docs
-   * @since 0.5.0
+   * @since 1.0.0
    */
   public readonly data = {
     /**
      * @see https://v2.xivapi.com/api/docs#tag/sheets
-     * @since 0.5.0
+     * @since 1.0.0
      */
     sheets: () => new Sheets(this.options),
     /**
      * @see https://v2.xivapi.com/api/docs#tag/versions
-     * @since 0.5.0
+     * @since 1.0.0
      */
     versions: () =>
       new Versions()
@@ -36,7 +36,7 @@ export default class XIVAPI {
         ),
     /**
      * @see https://v2.xivapi.com/api/docs#tag/assets
-     * @since 0.5.0
+     * @since 1.0.0
      */
     assets: () => new Assets(),
   };
@@ -45,7 +45,7 @@ export default class XIVAPI {
    * A wrapper for the XIVAPI v2 API.
    * @param {XIVAPIOptions} [options] The client options to fetch with.
    * @see https://v2.xivapi.com/api/docs
-   * @since 0.5.0
+   * @since 1.0.0
    */
   constructor(
     options: XIVAPIOptions = {
@@ -68,7 +68,7 @@ export default class XIVAPI {
    * @param {SearchParams} params Query paramters accepted by the search endpoint.
    * @returns {Promise<Models.SearchResponse>} Response structure for the search endpoint.
    * @see https://v2.xivapi.com/api/docs#tag/search/get/search
-   * @since 0.5.0
+   * @since 1.0.0
    */
   public async search(params: SearchParams): Promise<Models.SearchResponse> {
     const { data, errors } = await request({

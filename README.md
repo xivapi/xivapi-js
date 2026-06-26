@@ -13,12 +13,12 @@ If you need help or run into any issues, please [open an issue](https://github.c
 ## Installation
 
 ```bash
-npm install @xivapi/js@latest    # or use yarn, pnpm, or bun
+npm install @xivapi/js
 ```
 
-## Usage Examples
+Supports Node, Bun, Deno, and modern bundlers.
 
-#### 1. Importing and Initialization
+## Quick Start
 
 ```js
 import xivapi from "@xivapi/js";
@@ -34,57 +34,34 @@ const xivCustom = new xivapi({
 });
 ```
 
-#### 2. Get an Item
+## Examples
+
+#### 1. Get an Item
 
 ```js
-// Fetch the Gil item (item ID 1)
 const item = await xiv.items.get(1);
-
-console.log(item.fields.Name); // "Gil" (or equivalent in your language)
+console.log(item.fields.Name); // "Gil"
 ```
 
-#### 3. Search Example
+#### 2. Search sheets
 
 ```js
-// Find all items named "gil"
-const params = {
-  query: 'Name~"gil"',
-  sheets: "Item",
-};
-
+const params = { query: 'Name~"gil"', sheets: "Item" };
 const { results } = await xiv.search(params);
 console.log(results[0]);
-
-/*
-Output example:
-{
-  "score": 1,
-  "sheet": "Item",
-  "row_id": 1,
-  "fields": {
-    "Icon": {
-      "id": 65002,
-      "path": "ui/icon/065000/065002.tex",
-      "path_hr1": "ui/icon/065000/065002_hr1.tex"
-    },
-    "Name": "Gil",
-    "Singular": "gil"
-  }
-}
-*/
 ```
 
-#### 4. Using Raw XIVAPI v2 Endpoints
+#### 4. Using raw XIVAPI v2 endpoints
 
 ```js
-// Fetch a raw asset file (e.g. icon image)
+// Fetch an asset (e.g., icon)
 const assets = await xiv.data.assets();
 const asset = await assets.get({
   path: "ui/icon/051000/051474_hr1.tex",
   format: "png", // jpg or webp also supported
 });
 
-// List all quests
+// List all rows from the "Quest" sheet
 const sheets = await xiv.data.sheets();
 const quests = await sheets.list("Quest");
 console.log(quests);

@@ -32,7 +32,7 @@ export class Assets {
   async map(
     territory: string,
     index: string,
-    params?: Models.VersionQuery
+    params: Models.VersionQuery = {}
   ): Promise<Buffer> {
     const { data, errors } = await request({
       path: `/asset/map/${territory}/${index}`,
