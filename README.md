@@ -49,6 +49,24 @@ console.log(item.fields.Name); // "Gil"
 const params = { query: 'Name~"gil"', sheets: "Item" };
 const { results } = await xiv.search(params);
 console.log(results[0]);
+
+/*
+Output:
+{
+  "score": 1,
+  "sheet": "Item",
+  "row_id": 1,
+  "fields": {
+    "Icon": {
+      "id": 65002,
+      "path": "ui/icon/065000/065002.tex",
+      "path_hr1": "ui/icon/065000/065002_hr1.tex"
+    },
+    "Name": "Gil",
+    "Singular": "gil"
+  }
+}
+*/
 ```
 
 #### Using raw XIVAPI v2 endpoints
