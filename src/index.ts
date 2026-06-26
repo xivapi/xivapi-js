@@ -5,12 +5,13 @@ import type * as Models from "./models.d.ts";
 import { CustomError, request } from "./utils.js";
 
 export default class XIVAPI {
-  public readonly options: XIVAPIOptions;
-
   public readonly achievements: Sheet<"Achievement">;
+  public readonly actions: Sheet<"Action">;
+  public readonly emotes: Sheet<"Emote">;
+  public readonly items: Sheet<"Item">;
   public readonly minions: Sheet<"Companion">;
   public readonly mounts: Sheet<"Mount">;
-  public readonly items: Sheet<"Item">;
+  public readonly options: XIVAPIOptions;
 
   /**
    * Raw endpoints for the API. Please consider using the typed endpoints instead.
@@ -54,10 +55,11 @@ export default class XIVAPI {
     }
   ) {
     this.achievements = new Sheet("Achievement", options);
+    this.actions = new Sheet("Action", options);
+    this.emotes = new Sheet("Emote", options);
+    this.items = new Sheet("Item", options);
     this.minions = new Sheet("Companion", options);
     this.mounts = new Sheet("Mount", options);
-    this.items = new Sheet("Item", options);
-
     this.options = options;
   }
 
@@ -72,6 +74,7 @@ export default class XIVAPI {
     const { data, errors } = await request({
       path: "/search",
       params: params as Record<string, unknown>,
+      options: this.options
     });
     if (errors) throw new CustomError(errors[0].message);
     return data as Models.SearchResponse;
