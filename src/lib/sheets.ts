@@ -36,11 +36,13 @@ export class Sheet<T extends Models.SchemaSpecifier> {
 
   /**
    * Gets a list of rows from the sheet.
-   * @param {Models.SheetQuery} [params] The parameters to fetch the rows with.
+   * @param {Models.SheetQuery & Models.RowReaderQuery} [params] The parameters to fetch the rows with.
    * @returns {Promise<Models.SheetResponse>} A list of rows with typed fields.
    * @see https://v2.xivapi.com/api/docs#tag/sheets/get/sheet/{sheet}
    */
-  public list(params: Models.SheetQuery = {}): Promise<Models.SheetResponse> {
+  public list(
+    params: Models.SheetQuery & Models.RowReaderQuery = {}
+  ): Promise<Models.SheetResponse> {
     try {
       return new Sheets(this.options).list(this.type, params);
     } catch (error) {
@@ -60,24 +62,20 @@ export class Sheets {
    * @param {XIVAPIOptions} [options] The options to fetch the sheets with.
    * @see https://v2.xivapi.com/api/docs#tag/sheets
    */
-  public constructor(
-    options: XIVAPIOptions = {
-      language: "en",
-      verbose: false,
-    }
-  ) {
+  public constructor(options: XIVAPIOptions) {
     this.options = options;
   }
 
   /**
    * List known excel sheets that can be read by the API.
+   * @param {Models.VersionQuery} [params] The parameters to fetch all sheets with.
    * @returns {Promise<Models.ListResponse>} Response structure for the list endpoint.
    * @see https://v2.xivapi.com/api/docs#tag/sheets/get/sheet
    */
-  async all(): Promise<Models.ListResponse> {
+  async all(params: Models.VersionQuery = {}): Promise<Models.ListResponse> {
     const { data, errors } = await request({
       path: "/sheet",
-      params: {},
+      params: params as Record<string, unknown>,
       options: this.options,
     });
     /* v8 ignore if -- @preserve */
@@ -88,13 +86,13 @@ export class Sheets {
   /**
    * Read information about one or more rows and their related data.
    * @param {Models.SchemaSpecifier} sheet The sheet to fetch the rows from.
-   * @param {Models.SheetQuery} [params] The parameters to fetch the rows with.
+   * @param {Models.SheetQuery & Models.RowReaderQuery} [params] The parameters to fetch the rows with.
    * @returns {Promise<Models.SheetResponse>} A list of rows with typed fields.
    * @see https://v2.xivapi.com/api/docs#tag/sheets/get/sheet/{sheet}
    */
   async list(
     sheet: Models.SchemaSpecifier,
-    params: Models.SheetQuery = {}
+    params: Models.SheetQuery & Models.RowReaderQuery = {}
   ): Promise<Models.SheetResponse> {
     const { data, errors } = await request({
       path: `/sheet/${sheet}`,
