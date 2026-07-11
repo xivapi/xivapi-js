@@ -74,7 +74,7 @@ export default class XIVAPI {
     const { data, errors } = await request({
       path: "/search",
       params: params as Record<string, unknown>,
-      options: this.options
+      options: this.options,
     });
     if (errors) throw new CustomError(errors[0].message);
     return data as Models.SearchResponse;
