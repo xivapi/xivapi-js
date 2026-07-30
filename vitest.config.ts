@@ -6,6 +6,6 @@ export default defineConfig({
       provider: "v8",
       reporter: ["text", "json-summary", "lcov", "cobertura"],
     },
-    testTimeout: 10000,
+    globals: true,
   },
 });
