@@ -33,7 +33,7 @@ const xivCustom = new xivapi({
 });
 ```
 
-## Browser (ESM)
+### Browser (ESM)
 
 No build step required &ndash; import directly via CDN:
 
