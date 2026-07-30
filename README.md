@@ -39,7 +39,7 @@ No build step required &ndash; import directly via CDN:
 
 ```html
 <script type="module">
-  import xivapi from "[https://cdn.jsdelivr.net/npm/@xivapi/js/+esm](https://cdn.jsdelivr.net/npm/@xivapi/js/+esm)";
+  import xivapi from "https://cdn.jsdelivr.net/npm/@xivapi/js/+esm";
 
   const xiv = new xivapi();
 </script>
