@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v7
       - name: Nodejs
         if: matrix.runtime == 'node'
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
       - if: matrix.runtime == 'node'
@@ -31,14 +31,14 @@ jobs:
           npm run test
       - name: Bun
         if: matrix.runtime == 'bun'
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v2
       - if: matrix.runtime == 'bun'
         run: |
           bun install
           npm run test
       - name: Deno
         if: matrix.runtime == 'deno'
-        uses: denoland/setup-deno@v1
+        uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
       - if: matrix.runtime == 'deno'
@@ -56,7 +56,7 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v7
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
