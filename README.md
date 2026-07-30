@@ -13,37 +13,48 @@ If you need help or run into any issues, please [open an issue](https://github.c
 ## Installation
 
 ```bash
-npm install @xivapi/js
+npm install @xivapi/js # or pnpm/yarn/bun/deno
 ```
 
-Supports Node, Bun, Deno, and modern bundlers.
-
 ## Quick Start
+
+### Node.js / Bundlers
 
 ```js
 import xivapi from "@xivapi/js";
 
-// Basic instance
+// Initialize with default settings
 const xiv = new xivapi();
 
-// With options
+// Initialize with custom options
 const xivCustom = new xivapi({
-  version: "7.0", // specify game version
-  language: "ja", // specify language (ja, en, de, fr)
-  verbose: true, // output more logging
+  version: "7.55",
+  language: "ja",
 });
 ```
 
+## Browser (ESM)
+
+No build step required &ndash; import directly via CDN:
+
+<script type="module">
+  import xivapi from "[https://cdn.jsdelivr.net/npm/@xivapi/js/+esm](https://cdn.jsdelivr.net/npm/@xivapi/js/+esm)";
+
+  const xiv = new xivapi();
+</script>
+
+````
+
 ## Examples
 
-#### Get an Item
+#### Fetch an Item
 
 ```js
 const item = await xiv.items.get(1);
 console.log(item.fields.Name); // "Gil"
-```
+````
 
-#### Search sheets
+#### Search Game Sheets
 
 ```js
 const params = { query: 'Name~"gil"', sheets: "Item" };
@@ -69,29 +80,31 @@ Output:
 */
 ```
 
-#### Using raw XIVAPI v2 endpoints
+#### Asset & Raw Sheet Queries
 
 ```js
-// Fetch an asset (e.g., icon)
+// Fetch an asset path
 const assets = await xiv.data.assets();
 const asset = await assets.get({
   path: "ui/icon/051000/051474_hr1.tex",
-  format: "png", // jpg or webp also supported
+  format: "png", // Supports "png", "jpg", or "webp"
 });
 
-// List all rows from the "Quest" sheet
+// List rows from a game sheet
 const sheets = await xiv.data.sheets();
 const quests = await sheets.list("Quest");
 console.log(quests);
 
-// List available game versions
+// Query available game patch versions
 const versions = await xiv.data.versions();
 console.log(versions[0]); // e.g. "7.0"
 ```
 
 ## Contributing
 
-Contributions, bug reports, and feature requests are welcome! See [`CONTRIBUTING.md`](CONTRIBUTING.md) for guidelines on how to get started.
+Thanks for your interest in contributing! We welcome contributions of all kinds, including bug fixes, new features, documentation improvements, and translations.
+
+For details on getting started, coding standards, and submitting PRs, please see the [Contributor Manual](CONTRIBUTING.md). Please adhere to our [Code of Conduct](./CODE_OF_CONDUCT.md) when participating in this project.
 
 ## License
 
