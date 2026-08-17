@@ -2,7 +2,10 @@
   "name": "@xivapi/js",
   "version": "1.0.6",
   "description": "A Node.JS wrapper for xivapi.com",
-  "keywords": ["xivapi", "ffxiv"],
+  "keywords": [
+    "xivapi",
+    "ffxiv"
+  ],
   "homepage": "https://github.com/xivapi/xivapi-js",
   "bugs": {
     "url": "https://github.com/xivapi/xivapi-js/issues"
@@ -15,9 +18,11 @@
   "author": "Kai <mail@kai.moe> (https://kai.moe/)",
   "type": "module",
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsdown",
     "format": "biome format --write",
