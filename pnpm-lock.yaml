@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       std-env:
-        specifier: ^4.1.0
+        specifier: ^4.2.0
         version: 4.2.0
     devDependencies:
       '@biomejs/biome':
@@ -22,25 +22,25 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       '@tsconfig/node22':
-        specifier: ^22.0.5
+        specifier: ^22.0.6
         version: 22.0.6
       '@types/node':
-        specifier: ^26.0.1
+        specifier: ^26.2.0
         version: 26.2.0
       '@vitest/coverage-v8':
-        specifier: ^4.1.9
+        specifier: ^4.1.11
         version: 4.1.11(vitest@4.1.11)
       prettier:
         specifier: ^3.9.6
         version: 3.9.6
       tsdown:
-        specifier: ^0.22.3
+        specifier: ^0.22.14
         version: 0.22.14(typescript@7.0.2)
       typescript:
         specifier: ^7.0.2
         version: 7.0.2
       vitest:
-        specifier: ^4.1.9
+        specifier: ^4.1.11
         version: 4.1.11(@types/node@26.2.0)(@vitest/coverage-v8@4.1.11)(vite@8.2.1(@types/node@26.2.0)(yaml@2.9.0))
 
 packages:
