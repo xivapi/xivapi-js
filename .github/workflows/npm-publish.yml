@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
-      - run: npm install
+      - run: npm ci
       - run: npm run build
       - name: Generate provenance
         uses: actions/attest-build-provenance@v4

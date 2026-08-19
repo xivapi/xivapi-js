@@ -106,4 +106,4 @@ export type SearchParams = Models.SearchQuery &
   Models.VersionQuery &
   Models.RowReaderQuery & { verbose?: boolean };
 
-export { type Models, XIVAPI };
+export type { Models };
