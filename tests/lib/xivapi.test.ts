@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { type Models, XIVAPI } from "../../src";
+import type { Models } from "../../src";
+import XIVAPI from "../../src";
 
 describe("@xivapi/js", () => {
   const xiv = new XIVAPI();
