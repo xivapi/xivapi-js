@@ -20,22 +20,28 @@ jobs:
           - runtime: deno
     steps:
       - uses: actions/checkout@v7
+      - name: Setup pnpm
+        if: matrix.runtime == 'node'
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
       - name: Nodejs
         if: matrix.runtime == 'node'
         uses: actions/setup-node@v7
         with:
           node-version: ${{ matrix.node-version }}
+          cache: "pnpm"
       - if: matrix.runtime == 'node'
         run: |
-          npm install
-          npm run test
+          pnpm install --frozen-lockfile
+          pnpm test
       - name: Bun
         if: matrix.runtime == 'bun'
         uses: oven-sh/setup-bun@v2
       - if: matrix.runtime == 'bun'
         run: |
           bun install
-          npm run test
+          bun test
       - name: Deno
         if: matrix.runtime == 'deno'
         uses: denoland/setup-deno@v2
@@ -44,7 +50,7 @@ jobs:
       - if: matrix.runtime == 'deno'
         run: |
           deno install
-          npm run test
+          deno test
 
   publish:
     runs-on: ubuntu-latest
@@ -56,15 +62,21 @@ jobs:
       packages: write
     steps:
       - uses: actions/checkout@v7
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
       - uses: actions/setup-node@v7
         with:
           node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
-      - run: npm install
-      - run: npm run build
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - name: Build package
+        run: pnpm run build
       - name: Generate provenance
         uses: actions/attest-build-provenance@v4
         with:
           subject-path: dist/**
       - name: Verify npm publish
-        run: npm publish --provenance --dry-run || true
+        run: pnpm publish --dry-run --no-git-checks || true

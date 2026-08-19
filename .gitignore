@@ -1,13 +1,21 @@
-# ignore build outputs
+# build output
 dist/
 coverage/
 
-# ignore dependencies
+# dependencies
 node_modules/
 
-# ignore package locks and logs
-pnpm-lock.yaml
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# macOS-specific files
+.DS_Store
+
+# package locks
+package-lock.json
 yarn.lock
 bun.lock
 deno.lock
-*.log

@@ -14,16 +14,22 @@ jobs:
       attestations: write
     steps:
       - uses: actions/checkout@v7
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
       - uses: actions/setup-node@v7
         with:
           node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
-      - run: npm install
-      - run: npm run build
+          cache: "pnpm"
+      - run: pnpm install --frozen-lockfile
+      - name: Build package and publish
+        run: pnpm run build
       - name: Generate provenance
         uses: actions/attest-build-provenance@v4
         with:
           subject-path: dist/**
-      - run: npm publish --provenance --access public
+      - run: pnpm publish --provenance --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
