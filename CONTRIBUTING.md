@@ -44,6 +44,8 @@ Before opening a new issue:
 - Ensure all tests pass before submitting your PR (if a test suite is available).
 - Keep changes focused—smaller, well‑scoped PRs are easier to review and merge.
 
-## Community Code of Conduct
+## Preview releases
 
-By contributing to this monorepo, you agree to follow our [Code of Conduct](./CODE_OF_CONDUCT.md).
+Maintainers can create preview releases for any pull requests containing pending changesets by adding the `pr-preview` label to such PRs. When doing so, a GitHub Actions workflow will be triggered to create a preview release for all necessary packages and a comment will be added to the PR with instructions on how to install the preview packages.
+
+To update a preview release after making additional changes to the PR, add the `pr-preview` label again to re-trigger the workflow.
