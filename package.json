@@ -2,41 +2,49 @@
   "name": "@xivapi/js",
   "version": "1.0.6",
   "description": "A Node.JS wrapper for xivapi.com",
-  "keywords": ["xivapi", "ffxiv"],
+  "keywords": [
+    "xivapi",
+    "ffxiv"
+  ],
   "homepage": "https://github.com/xivapi/xivapi-js",
-  "bugs": {
-    "url": "https://github.com/xivapi/xivapi-js/issues"
-  },
+  "bugs": "https://github.com/xivapi/xivapi-js/issues",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xivapi/xivapi-js.git"
+    "url": "https://github.com/xivapi/xivapi-js.git"
   },
   "license": "MIT",
-  "author": "Kai <mail@kai.moe> (https://kai.moe/)",
+  "author": "miichom <hello@cammy.xyz> (https://cammy.xyz/)",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsdown",
     "format": "biome format --write",
     "lint": "biome check --write",
-    "lint:check": "biome check",
-    "test": "vitest --coverage"
+    "test": "vitest --coverage",
+    "version": "pnpm changeset version && pnpm i --no-frozen-lockfile"
   },
   "dependencies": {
-    "std-env": "^4.1.0"
+    "std-env": "^4.2.0"
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.1",
-    "@tsconfig/node22": "^22.0.5",
-    "@types/node": "^26.0.1",
-    "@vitest/coverage-v8": "^4.1.9",
-    "tsdown": "^0.22.3",
+    "@changesets/changelog-github": "^1.0.0",
+    "@changesets/cli": "^3.0.0",
+    "@tsconfig/node22": "^22.0.6",
+    "@types/node": "^26.2.0",
+    "@vitest/coverage-v8": "^4.1.11",
+    "pkg-pr-new": "^0.0.88",
+    "prettier": "^3.9.6",
+    "tsdown": "^0.22.14",
     "typescript": "^7.0.2",
-    "vitest": "^4.1.9"
+    "vitest": "^4.1.11"
   },
+  "packageManager": "pnpm@11.10.0",
   "engines": {
     "node": ">=20.0.0"
   }

@@ -1,0 +1,47 @@
+name: Format
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  format:
+    if: github.repository == 'xivapi/xivapi-js'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+          
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24.19.0
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Format code
+        run: pnpm run format
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v7.2.0
+        with:
+          commit_message: "[ci] format"
+          branch: ${{ github.head_ref || github.ref_name }}
+          commit_user_name: github-actions[bot]
+          commit_user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          commit_author: ${{ github.event.commits[0].author.name || github.actor }} <${{ github.actor }}@users.noreply.github.com>

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@4.0.0/schema.json",
+  "baseBranch": "origin/main",
+  "access": "public",
+  "prettier": false,
+  "changelog": ["@changesets/changelog-github", { "repo": "xivapi/xivapi-js" }],
+  "commit": false,
+  "ignore": [],
+  "fixed": [],
+  "linked": [],
+  "updateInternalDependencies": "patch"
+}
