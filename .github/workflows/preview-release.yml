@@ -1,0 +1,83 @@
+name: Preview Release
+permissions: {}
+
+on:
+    pull_request:
+        branches: [main]
+        types: [labeled]
+
+# Automatically cancel in-progress actions on the same branch
+concurrency:
+    group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    preview:
+        name: Preview Release
+        if: ${{ github.repository_owner == 'xivapi' && github.event.label.name == 'pr-preview' }}
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+            pull-requests: write
+
+        steps:
+            - name: Checkout Repo
+              uses: actions/checkout@v7
+              with:
+                  # While releasing with changesets works with a shallow clone, this is not the case of
+                  # running `changeset status` which does not extend a shallow clone.
+                  fetch-depth: 0
+                  persist-credentials: false
+
+            - name: Setup PNPM
+              uses: pnpm/action-setup@v6
+
+            - name: Setup Node
+              uses: actions/setup-node@v6
+              with:
+                  node-version: 24.19.0
+                  cache: "pnpm"
+
+            - name: Install Dependencies
+              run: pnpm install --frozen-lockfile
+
+            - name: Get changeset status
+              id: changeset
+              run: |
+                  pnpm changeset status --output changeset-status.json
+                  echo "status=$(cat changeset-status.json | jq -c .)" >> $GITHUB_OUTPUT
+
+            - name: Verify changeset exists
+              id: preview
+              uses: actions/github-script@v7
+              env:
+                  CHANGESET: ${{ steps.changeset.outputs.status }}
+              with:
+                  script: |
+                      const changeset = JSON.parse(process.env.CHANGESET);
+                      // Verify there is at least one active changeset in the PR branch
+                      const hasChangeset = Array.isArray(changeset.changesets) && changeset.changesets.length > 0;
+                      core.setOutput('has_changeset', hasChangeset ? 'true' : '');
+
+            - name: Remove Preview Label
+              uses: actions/github-script@v7
+              with:
+                  script: |
+                      github.rest.issues.removeLabel({
+                        owner: context.repo.owner,
+                        repo: context.repo.repo,
+                        issue_number: context.issue.number,
+                        name: 'pr-preview'
+                      });
+
+            - name: Publish preview package
+              env:
+                  HAS_CHANGESET: ${{ steps.preview.outputs.has_changeset }}
+              run: |
+                  if [ -z "$HAS_CHANGESET" ]; then
+                    echo "::error::No changesets found in this PR."
+                    echo "::error::Make sure the pull request includes a changeset."
+                    exit 1
+                  fi
+
+                  pnpm exec pkg-pr-new publish --pnpm --compact --packageManager=pnpm --no-template .
