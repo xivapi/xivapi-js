@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   format:
-    if: github.repository == 'xivapi/xivapi-js'
+    if: github.repository_owner == 'xivapi'
     runs-on: ubuntu-latest
     permissions:
       contents: write
