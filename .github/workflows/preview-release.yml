@@ -33,7 +33,7 @@ jobs:
               uses: pnpm/action-setup@v6
 
             - name: Setup Node
-              uses: actions/setup-node@v6
+              uses: actions/setup-node@v7
               with:
                   node-version: 24.19.0
                   cache: "pnpm"
@@ -49,7 +49,7 @@ jobs:
 
             - name: Verify changeset exists
               id: preview
-              uses: actions/github-script@v7
+              uses: actions/github-script@v9
               env:
                   CHANGESET: ${{ steps.changeset.outputs.status }}
               with:
@@ -60,7 +60,7 @@ jobs:
                       core.setOutput('has_changeset', hasChangeset ? 'true' : '');
 
             - name: Remove Preview Label
-              uses: actions/github-script@v7
+              uses: actions/github-script@v9
               with:
                   script: |
                       github.rest.issues.removeLabel({
