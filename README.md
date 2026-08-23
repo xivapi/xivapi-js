@@ -104,7 +104,7 @@ console.log(versions[0]); // e.g. "7.0"
 
 Thanks for your interest in contributing! We welcome contributions of all kinds, including bug fixes, new features, documentation improvements, and translations.
 
-For details on getting started, coding standards, and submitting PRs, please see the [Contributor Manual](CONTRIBUTING.md). Please adhere to our [Code of Conduct](./CODE_OF_CONDUCT.md) when participating in this project.
+For details on getting started, coding standards, and submitting PRs, please refer to our [Contributor Manual](CONTRIBUTING.md).
 
 ## License
 
