@@ -2,10 +2,7 @@
   "$schema": "https://unpkg.com/@changesets/config@4.0.0/schema.json",
   "baseBranch": "origin/main",
   "access": "public",
-  "prettier": false,
-  "commit": false,
-  "ignore": [],
-  "fixed": [],
-  "linked": [],
+  "commit": true,
+  "changelog": false,
   "updateInternalDependencies": "patch"
 }
