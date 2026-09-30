@@ -3,7 +3,6 @@
   "baseBranch": "origin/main",
   "access": "public",
   "prettier": false,
-  "changelog": ["@changesets/changelog-github", { "repo": "xivapi/xivapi-js" }],
   "commit": false,
   "ignore": [],
   "fixed": [],
