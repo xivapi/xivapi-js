@@ -1,6 +1,6 @@
 {
   "name": "@xivapi/js",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A Node.JS wrapper for xivapi.com",
   "keywords": [
     "xivapi",

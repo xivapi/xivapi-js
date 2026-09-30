@@ -1,5 +1,11 @@
 # @xivapi/js
 
+## 1.0.8
+
+### Patch Changes
+
+- dd4be58: Fix package build published in v1.0.7 containing no code (#56)
+
 ## 1.0.7
 
 ### Patch Changes
