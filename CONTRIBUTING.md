@@ -6,23 +6,30 @@ Thanks for your interest in contributing! We welcome contributions of all kinds,
 
 1. **Fork** the repository.
 2. **Create a feature branch**, for example:
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
+
 3. Make your changes, following the style and structure of the project or package you are modifying.
 4. **Add a changeset** if your changes affect package users (bug fixes, features, or updates):
+
    ```bash
    pnpm exec changeset
    ```
-   Follow the prompts to select a semver bump (`patch` or `minor`) and enter a summary for `CHANGELOG.md`. Documentation-only changes do not require a changeset.
+
+   Follow the prompts to select a semver bump (`patch` or `minor`) and enter a summary for [GitHub Releases](https://github.com/xivapi/xivapi-js/releases). Documentation-only changes do not require a changeset.
+
 5. Add tests or verify that your changes work as expected.
 6. Commit your work using clear, descriptive commit messages, including the generated `.changeset/*.md` file.
 7. Push your branch:
+
    ```bash
    git push origin feature/your-feature-name
    ```
+
 8. Open a Pull Request.
-   In your PR description, include:
+   When you create a new PR please aim to use our template as much as possible, we are not strict if you choose to not use it. If you choose not to use it, please include the following:
 
 - What you changed
 - Why you changed it
@@ -43,9 +50,3 @@ Before opening a new issue:
 - Update or add tests when appropriate.
 - Ensure all tests pass before submitting your PR (if a test suite is available).
 - Keep changes focused—smaller, well‑scoped PRs are easier to review and merge.
-
-## Preview releases
-
-Maintainers can create preview releases for any pull requests containing pending changesets by adding the `pr-preview` label to such PRs. When doing so, a GitHub Actions workflow will be triggered to create a preview release for all necessary packages and a comment will be added to the PR with instructions on how to install the preview packages.
-
-To update a preview release after making additional changes to the PR, add the `pr-preview` label again to re-trigger the workflow.
