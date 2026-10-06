@@ -16,7 +16,7 @@ If you need help or run into any issues, please [open an issue](https://github.c
 npm install @xivapi/js # or pnpm/yarn/bun/deno
 ```
 
-This package supports importing via a CDN instead of using the above terminal command, please do the following if you want to non-Node.js environment: `https://cdn.jsdelivr.net/npm/@xivapi/js/+esm`.
+This package supports importing via a CDN instead of using the above terminal command, please use the following URL if you want to non-Node.js environment: `https://cdn.jsdelivr.net/npm/@xivapi/js/+esm`.
 
 ## Basic Usage
 
