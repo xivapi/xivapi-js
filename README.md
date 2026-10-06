@@ -6,106 +6,66 @@
 A JavaScript library for working with [XIVAPI v2](https://v2.xivapi.com/), providing a source of Final Fantasy XIV game data. It lets you fetch, search, and use FFXIV data easily in a promise-based manner.
 
 > [!WARNING]
-> `@xivapi/js@0.4.5` (using XIVAPI v1) is now deprecated. Please use it at your own risk. We strongly recommend you update to the latest version. Migration guide and details: https://v2.xivapi.com/docs/migrate/.
+> `@xivapi/js@0.4.5` (using XIVAPI v1) is now deprecated. Please use it at your own risk. We strongly recommend you update to the latest version. Migration guide and details: <https://v2.xivapi.com/docs/migrate/>.
 
-If you need help or run into any issues, please [open an issue](https://github.com/xivapi/xivapi-js/issues) on GitHub or join the [XIVAPI Discord server](https://discord.gg/MFFVHWC) for support.
+If you need help or run into any issues, please [open an issue](https://github.com/xivapi/xivapi-js/issues) on GitHub or join the [Discord] for support.
 
 ## Installation
 
-```bash
+```sh
 npm install @xivapi/js # or pnpm/yarn/bun/deno
 ```
 
-## Quick Start
+This package supports importing via a CDN instead of using the above terminal command, please do the following if you want to non-Node.js environment: `https://cdn.jsdelivr.net/npm/@xivapi/js/+esm`.
 
-### Node.js / Bundlers
+## Basic Usage
 
 ```js
-import xivapi from "@xivapi/js";
+import XIVAPI from "@xivapi/js";
 
-// Initialize with default settings
-const xiv = new xivapi();
+const client = new XIVAPI();
 
-// Initialize with custom options
-const xivCustom = new xivapi({
-  version: "7.55",
+// Override the default client options
+const customClient = new XIVAPI({
+  version: "7.55"
   language: "ja",
+  verbose: true
 });
-```
 
-### Browser (ESM)
+// Get a particular 'row_id' from the predefined sheet
+const item = await client.items.get(1);
+console.log(item.fields.Name);
 
-No build step required &ndash; import directly via CDN:
-
-```html
-<script type="module">
-  import xivapi from "https://cdn.jsdelivr.net/npm/@xivapi/js/+esm";
-
-  const xiv = new xivapi();
-</script>
-```
-
-## Examples
-
-#### Fetch an Item
-
-```js
-const item = await xiv.items.get(1);
-console.log(item.fields.Name); // "Gil"
-````
-
-#### Search Game Sheets
-
-```js
+// Search for row(s) in a particular game sheet(s)
 const params = { query: 'Name~"gil"', sheets: "Item" };
-const { results } = await xiv.search(params);
+const { results } = await client.search(params);
 console.log(results[0]);
 
-/*
-Output:
-{
-  "score": 1,
-  "sheet": "Item",
-  "row_id": 1,
-  "fields": {
-    "Icon": {
-      "id": 65002,
-      "path": "ui/icon/065000/065002.tex",
-      "path_hr1": "ui/icon/065000/065002_hr1.tex"
-    },
-    "Name": "Gil",
-    "Singular": "gil"
-  }
-}
-*/
-```
-
-#### Asset & Raw Sheet Queries
-
-```js
-// Fetch an asset path
-const assets = await xiv.data.assets();
+// Get game assets (images/maps)
+const assets = await client.data.assets();
 const asset = await assets.get({
   path: "ui/icon/051000/051474_hr1.tex",
   format: "png", // Supports "png", "jpg", or "webp"
 });
 
-// List rows from a game sheet
-const sheets = await xiv.data.sheets();
+// List all game sheets available
+const sheets = await client.data.sheets();
 const quests = await sheets.list("Quest");
 console.log(quests);
 
-// Query available game patch versions
-const versions = await xiv.data.versions();
-console.log(versions[0]); // e.g. "7.0"
+// List all support game versions on XIVAPI
+const versions = await client.data.versions();
+console.log(versions[0]);
 ```
 
 ## Contributing
 
 Thanks for your interest in contributing! We welcome contributions of all kinds, including bug fixes, new features, documentation improvements, and translations.
 
-For details on getting started, coding standards, and submitting PRs, please refer to our [Contributor Manual](CONTRIBUTING.md).
+For details on getting started, coding standards, and submitting PRs, please refer to our [Contributor Manual](/CONTRIBUTING.md).
 
 ## License
 
-This project is licensed under the MIT License. See [`LICENSE`](LICENSE) for details.
+This project is licensed under the MIT License. See [`LICENSE`](/LICENSE) for details.
+
+[Discord]: https://discord.gg/MFFVHWC
