@@ -1,3 +1,7 @@
 {
-  "recommendations": ["ryanluker.vscode-coverage-gutters", "biomejs.biome"]
+  "recommendations": [
+    "ryanluker.vscode-coverage-gutters",
+    "biomejs.biome",
+    "davidanson.vscode-markdownlint"
+  ]
 }
