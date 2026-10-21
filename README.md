@@ -27,16 +27,16 @@ const client = new XIVAPI();
 
 // Override the default client options
 const customClient = new XIVAPI({
-  version: "7.55"
+  version: "7.55",
   language: "ja",
   verbose: true
 });
 
-// Get a particular 'row_id' from the predefined sheet
+// Get a particular 'row_id' from a predefined sheet
 const item = await client.items.get(1);
 console.log(item.fields.Name);
 
-// Search for row(s) in a particular game sheet(s)
+// Search for row (or rows) in from game sheets
 const params = { query: 'Name~"gil"', sheets: "Item" };
 const { results } = await client.search(params);
 console.log(results[0]);
